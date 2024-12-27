@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Fernando • Portfólio</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        /* Global styles */
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: url('images/portfolio_background.png') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+        }
+
+        .profile-picture {
+            width: 25vh;
+            border-radius: 50%;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 1em 2em;
+            position: fixed;
+            top: 0;
+            width: calc(100% - 4em);
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .header img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .header nav {
+            display: flex;
+            gap: 2em;
+        }
+
+        .header nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            transition: color 0.3s, transform 0.3s;
+            align-items: center;
+            display: flex;
+        }
+
+        .header nav a:hover {
+            color: #f39c12;
+            transform: scale(1.1);
+        }
+
+        .header nav a img {
+            width: 32px;
+            height: 32px;
+            margin-right: 0.4em;
+        }
+
+        /* Section container */
+        .sections {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 100px;
+            padding: 1em;
+        }
+
+        .section {
+            flex: 1;
+            margin: 1em;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 1.5em;
+        }
+
+        .section:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1em;
+        }
+
+        .section img {
+            max-width: 100%;
+            border-radius: 25%;
+            margin-bottom: 1em;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .section p {
+            text-align: justify;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .project img, .tool img {
+            width: 64px;
+            height: 64px;
+            margin-right: 1em;
+            border-width: 0px;
+        }
+
+        /* Tools and projects */
+        .tools, .projects {
+            margin-top: 1em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            justify-content: center;
+        }
+
+        .tool, .project {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .tool img, .project img {
+            width: 32px;
+            height: 32px;
+            margin-right: 0.5em;
+        }
+
+        .tool:hover, .project:hover {
+            color: #f39c12;
+            transform: translateY(-5px);
+        }
+
+        .project-description {
+            margin-top: 0.2em;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sections {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section {
+                margin: 0.5em 0;
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header nav a {
+                font-size: 0.9rem;
+            }
+
+            .section h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 8px;
+            color: black;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Fernando Falat • Cientista de Dados • Bioinformáta</div>
+        <nav>
+            <a href="https://github.com/falatfernando" target="_blank">
+                <img src="images/github_icon.png" alt="GitHub">
+                GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/fernandofalat/" target="_blank">
+                <img src="images/linkedin_icon.png" alt="LinkedIn">
+                LinkedIn
+            </a>
+            <a href="mailto:fernandofalat@proton.me">
+                <img src="images/email_icon.png" alt="Email">
+                Email
+            </a>
+            <a href="https://lattes.cnpq.br" target="_blank">
+                <img src="images/lattes_icon.png" alt="Lattes">
+                Lattes
+            </a>
+        </nav>
+    </div>
+    <div class="sections">
+        <div class="section">
+            <h2>Sobre Mim</h2>
+            <img class="profile-picture" src="images/profile_picture.jpg" alt="Profile Picture">
+            <p>Engenheiro de Bioprocessos e Biotecnologia, Mestrando em Bioinformática aplicada à Microbiologia, especialista em Data Science & Analytics.</p>
+            <p>Certificado em Ciência de Dados Aplicada à Genômica, apaixonado por ciências da vida e tecnologia.</p>
+        </div>
+        <div class="section">
+            <h2>Ferramentas</h2>
+            <div class="tools">
+                <a href="https://www.python.org/" class="tool">
+                    <img src="images/python.png" alt="Python">
+                    Python
+                </a>
+                <a href="https://www.r-project.org/" class="tool">
+                    <img src="images/r.png" alt="R">
+                    R
+                </a>
+                <a href="https://learn.microsoft.com/pt-br/shows/azure-developers/what-is-sql-server-sql-tips-for-developers-0101" class="tool">
+                    <img src="images/sql-server.png" alt="SQL Server">
+                    SQL Server
+                </a>
+                <a href="https://www.databricks.com/" class="tool">
+                    <img src="images/databricks.png" alt="Databricks">
+                    Databricks
+                </a>
+                <a href="https://daxstudio.org/" class="tool">
+                    <img src="images/dax.png" alt="DAX e M">
+                    DAX e M
+                </a>
+                <a href="https://www.typescriptlang.org/" class="tool">
+                    <img src="images/typescript.png" alt="TypeScript">
+                    TypeScript
+                </a>
+                <a href="https://www.docker.com/" class="tool">
+                    <img src="images/docker.png" alt="Docker">
+                    Docker
+                </a>
+                    <a href="https://www.microsoft.com/pt-br/power-platform/products/power-bi/getting-started-with-power-bi" class="tool">
+                        <img src="images/power-bi.png" alt="Power BI">
+                        Power BI
+                    </a>
+                    <a href="https://streamlit.io/" class="tool">
+                        <img src="images/streamlit.png" alt="Streamlit">
+                        Streamlit
+                    </a>
+                    <a href="https://plotly.com/" class="tool">
+                        <img src="images/plotly.png" alt="Dash">
+                        Dash Plotly
+                    </a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" class="tool">
+                        <img src="images/html_css.png" alt="HTML e CSS">
+                        HTML e CSS
+                    </a>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Projetos</h2>
+            <div class="projects">
+                <a href="https://preprot.streamlit.app" class="project">
+                    <img src="images/preprot_icon.png" alt="PreProt">
+                    <div>
+                        <span>PreProt</span>
+                        <p class="project-description">Aplicativo para predição de proteínas de <i>E. coli</i> baseado em Machine Learning.</p>
+                    </div>
+                </a>
+                <a href="https://falat-covidpipeline.streamlit.app/" class="project">
+                    <img src="images/covid_icon.png" alt="Pipeline COVID">
+                    <div>
+                        <span>Pipeline COVID</span>
+                        <p class="project-description">Pipeline automatizado para triagem de medicamentos contra COVID-19.</p>
+                    </div>
+                </a>
+                <a href="#ml-models" class="project">
+                    <img src="images/ml_icon.png" alt="Modelos de IA">
+                    <div>
+                        <span>Modelos de IA</span>
+                        <p class="project-description">Modelos preditivos para aplicações científicas e industriais.</p>
+                    </div>
+                </a>
+                <a href="#dashboards" class="project">
+                    <img src="images/dashboard_icon.png" alt="Dashboards">
+                    <div>
+                        <span>Dashboards</span>
+                        <p class="project-description">Visualizações interativas para análise de dados complexos.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div id="popup-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2 id="popup-title"></h2>
+                <p id="popup-text"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Modal and close elements
+        const modal = document.getElementById("popup-modal");
+        const modalTitle = document.getElementById("popup-title");
+        const modalText = document.getElementById("popup-text");
+        const closeButton = document.querySelector(".close-button");
+    
+        // Text for each popup
+        const popups = {
+            "Modelos de IA": "Desenvolvimento de modelos de machine learning aplicados a bioinformática (pesquisa) e ligados a área de negócios da cadeia da BRF S.A. (business).",
+            "Dashboards": "Desenvolvimento de arquiteturas de dados e soluções de BI para análise de dados complexos e tomada de decisão para um público grande e pela alta liderança da BRF S.A.",
+        };
+    
+        // Event listener for links
+        document.querySelectorAll("a[href='#ml-models'], a[href='#dashboards']").forEach(link => {
+            link.addEventListener("click", (event) => {
+                event.preventDefault();
+                const textKey = link.querySelector("div > span").textContent;
+                modalTitle.textContent = textKey;
+                modalText.textContent = popups[textKey];
+                modal.style.display = "block";
+            });
+        });
+    
+        // Close modal
+        closeButton.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+    
+        // Close modal when clicking outside of it
+        window.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>    
+</body>
+</html>
