@@ -40,7 +40,7 @@
             width: 100%;
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+            flex-wrap: wrap;
         }
 
         .header img {
@@ -52,7 +52,7 @@
         .header .logo {
             font-size: 1rem;
             font-weight: bold;
-            margin-bottom: 0.5em; /* Adds space for small screens */
+            margin-bottom: 0.5em;
             text-align: center;
             align-items: center;
             justify-content: center;
@@ -60,10 +60,10 @@
 
         .header nav {
             display: flex;
-            flex-wrap: wrap; /* Wraps links to avoid overflowing */
-            justify-content: center; /* Centers links */
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1em;
-            width: 100%; /* Ensures links take the full width */
+            width: 100%;
         }
 
         .header nav a {
@@ -272,7 +272,7 @@
         <div class="section">
             <h2>Sobre Mim</h2>
             <img class="profile-picture" src="images/profile_picture.jpg" alt="Profile Picture">
-            <p>Apaixonado por ciências da vida e tecnologia 🧬</p>
+            <p style = 'text-align: center;'>Profissional sênior apaixonado por ciências da vida e tecnologia 🧬</p>
             <p>Engenheiro de Bioprocessos e Biotecnologia pela Universidade Positivo, Especialista em Data Science & Analytics pela USP/ESALQ e Mestrando em Bioinformática aplicada à Microbiologia pela USP/ICB.</p>
             <p>Certificado em Ciência de Dados Aplicada à Genômica pela Johns Hopkins University.</p>
         </div>
@@ -326,6 +326,7 @@
                     <a href="https://www.djangoproject.com/" class="tool">
                         <img src="images/django.png" alt="Flask">
                         Django
+                    </a>
             </div>
         </div>
         <div class="section">
@@ -334,29 +335,36 @@
                 <a href="https://preprot.streamlit.app" class="project">
                     <img src="images/preprot_icon.png" alt="PreProt">
                     <div>
-                        <span>PreProt</span>
-                        <p class="project-description">Aplicativo para predição de proteínas de <i>E. coli</i> baseado em Machine Learning.</p>
+                        <span><b>PreProt</b></span>
+                        <p class="project-description">Aplicativo para predição de proteínas de <i>E. coli</i> através de machine learning.</p>
                     </div>
                 </a>
                 <a href="https://falat-covidpipeline.streamlit.app/" class="project">
                     <img src="images/covid_icon.png" alt="Pipeline COVID">
                     <div>
-                        <span>Pipeline COVID</span>
-                        <p class="project-description">Pipeline automatizado para triagem de medicamentos contra COVID-19.</p>
+                        <span><b>Pipeline COVID</b></span>
+                        <p class="project-description">Aplicativo com pipeline automatizado para triagem de medicamentos contra COVID-19 através de machine learning.</p>
                     </div>
                 </a>
                 <a href="#ml-models" class="project">
-                    <img src="images/ml_icon.png" alt="Modelos de IA">
+                    <img src="images/ml_icon.png" alt="Modelos de Inteligência Artifical">
                     <div>
-                        <span>Modelos de IA</span>
-                        <p class="project-description">Modelos preditivos para aplicações científicas e industriais.</p>
+                        <span><b>Modelos de Inteligência Artifical</b></span>
+                        <p class="project-description">Criação e implementação de modelos de machine learning e deep learning voltados para aplicações industriais, corporativas e científicas.</p>
                     </div>
                 </a>
                 <a href="#dashboards" class="project">
                     <img src="images/dashboard_icon.png" alt="Dashboards">
                     <div>
-                        <span>Dashboards</span>
-                        <p class="project-description">Visualizações interativas para análise de dados complexos.</p>
+                        <span><b>Dashboards</b></span>
+                        <p class="project-description">Transformando dados complexos em insights através de visualizações interativas e dinâmicas através do Power BI, Streamlit e Dash Plotly.</p>
+                    </div>
+                </a>
+                <a href="#automacoes" class="project">
+                    <img src="images/automation.png" alt="Dashboards">
+                    <div>
+                        <span><b>Automações</b></span>
+                        <p class="project-description">Automações de rotinas repetitivas e webscraping!</p>
                     </div>
                 </a>
             </div>
@@ -378,12 +386,13 @@
     
         // Text for each popup
         const popups = {
-            "Modelos de IA": "Desenvolvimento de modelos de machine learning aplicados a bioinformática (pesquisa) e ligados a área de negócios da cadeia da BRF S.A. (business).",
-            "Dashboards": "Desenvolvimento de arquiteturas de dados e soluções de BI para análise de dados complexos e tomada de decisão para um público grande e pela alta liderança da BRF S.A.",
+            "Modelos de Inteligência Artifical": "Desenvolvimento de aplicativos de machine learning como o PreProt e Pipeline COVID-19, além de modelos de deep learning para aplicações industriais na BRF S.A.",
+            "Dashboards": "Desenvolvimento de arquiteturas de dados e soluções de business intelligence para análise de dados complexos e tomada de decisão para a alta liderança e analistas de negócio da BRF S.A.",
+            "Automações": "Desenvolvimento de webcrawlers e automações de rotinas repetitivas através do Python e Power Automate.",
         };
     
         // Event listener for links
-        document.querySelectorAll("a[href='#ml-models'], a[href='#dashboards']").forEach(link => {
+        document.querySelectorAll("a[href='#ml-models'], a[href='#dashboards'], a[href='#automacoes']").forEach(link => {
             link.addEventListener("click", (event) => {
                 event.preventDefault();
                 const textKey = link.querySelector("div > span").textContent;
