@@ -32,13 +32,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-direction: column;
             background-color: rgba(0, 0, 0, 0.8);
-            padding: 1em 2em;
+            padding: 1em;
             position: fixed;
             top: 0;
-            width: calc(100% - 4em);
+            width: 100%;
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            flex-wrap: wrap; /* Allows items to wrap on smaller screens */
         }
 
         .header img {
@@ -48,22 +50,29 @@
         }
 
         .header .logo {
-            font-size: 1.5rem;
+            font-size: 1rem;
             font-weight: bold;
+            margin-bottom: 0.5em; /* Adds space for small screens */
+            text-align: center;
+            align-items: center;
+            justify-content: center;
         }
 
         .header nav {
             display: flex;
-            gap: 2em;
+            flex-wrap: wrap; /* Wraps links to avoid overflowing */
+            justify-content: center; /* Centers links */
+            gap: 1em;
+            width: 100%; /* Ensures links take the full width */
         }
 
         .header nav a {
             text-decoration: none;
             color: white;
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: color 0.3s, transform 0.3s;
-            align-items: center;
             display: flex;
+            align-items: center;
         }
 
         .header nav a:hover {
@@ -72,8 +81,8 @@
         }
 
         .header nav a img {
-            width: 32px;
-            height: 32px;
+            width: 24px;
+            height: 24px;
             margin-right: 0.4em;
         }
 
@@ -181,6 +190,25 @@
             }
         }
 
+        /* Media Query for Small Screens */
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.5em;
+            }
+
+            .header .logo {
+                font-size: 1rem;
+            }
+
+            .header nav a {
+                font-size: 0.8rem;
+            }
+
+            .header nav {
+                gap: 0.5em;
+            }
+        }
+
         .modal {
         display: none;
         position: fixed;
@@ -220,7 +248,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="logo">Fernando Falat • Cientista de Dados • Bioinformáta</div>
+        <div class="logo">Fernando Falat • Cientista de Dados • Bioinformata • Engenheiro de Bioprocessos e Biotecnologia</div>
         <nav>
             <a href="https://github.com/falatfernando" target="_blank">
                 <img src="images/github_icon.png" alt="GitHub">
@@ -244,7 +272,7 @@
         <div class="section">
             <h2>Sobre Mim</h2>
             <img class="profile-picture" src="images/profile_picture.jpg" alt="Profile Picture">
-            <p>Engenheiro de Bioprocessos e Biotecnologia, Mestrando em Bioinformática aplicada à Microbiologia, especialista em Data Science & Analytics.</p>
+            <p>Engenheiro de Bioprocessos e Biotecnologia, Especialista em Data Science & Analytics e Mestrando em Bioinformática aplicada à Microbiologia.</p>
             <p>Certificado em Ciência de Dados Aplicada à Genômica, apaixonado por ciências da vida e tecnologia.</p>
         </div>
         <div class="section">
