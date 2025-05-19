@@ -1,418 +1,732 @@
 <!DOCTYPE html>
-<html lang="br">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <title>Fernando • Portfólio</title>
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <style>
-        /* Global styles */
-        body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background: url('images/portfolio_background.png') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100vh;
-        }
-
-        .profile-picture {
-            width: 25vh;
-            border-radius: 50%;
-            margin: 0 auto;
-            display: block;
-        }
-
-        /* Header styles */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-direction: column;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 1em;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            flex-wrap: wrap;
-        }
-
-        .header img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-        }
-
-        .header .logo {
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 0.5em;
-            text-align: center;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .header nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1em;
-            width: 100%;
-        }
-
-        .header nav a {
-            text-decoration: none;
-            color: white;
-            font-size: 0.9rem;
-            transition: color 0.3s, transform 0.3s;
-            display: flex;
-            align-items: center;
-        }
-
-        .header nav a:hover {
-            color: #f39c12;
-            transform: scale(1.1);
-        }
-
-        .header nav a img {
-            width: 24px;
-            height: 24px;
-            margin-right: 0.4em;
-        }
-
-        /* Section container */
-        .sections {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 100px;
-            padding: 1em;
-        }
-
-        .section {
-            flex: 1;
-            margin: 1em;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            padding: 1.5em;
-        }
-
-        .section:hover {
-            transform: scale(1.02);
-            transition: transform 0.3s;
-        }
-
-        .section h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1em;
-        }
-
-        .section img {
-            max-width: 100%;
-            border-radius: 25%;
-            margin-bottom: 1em;
-            border: 3px solid rgba(255, 255, 255, 0.8);
-        }
-
-        .section p {
-            text-align: justify;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-        .project img, .tool img {
-            width: 64px;
-            height: 64px;
-            margin-right: 1em;
-            border-width: 0px;
-        }
-
-        /* Tools and projects */
-        .tools, .projects {
-            margin-top: 1em;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1em;
-            justify-content: center;
-        }
-
-        .tool, .project {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            transition: transform 0.3s, color 0.3s;
-        }
-
-        .tool img, .project img {
-            width: 32px;
-            height: 32px;
-            margin-right: 0.5em;
-        }
-
-        .tool:hover, .project:hover {
-            color: #f39c12;
-            transform: translateY(-5px);
-        }
-
-        .project-description {
-            margin-top: 0.2em;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .sections {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .section {
-                margin: 0.5em 0;
-                width: 90%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header nav a {
-                font-size: 0.9rem;
-            }
-
-            .section h2 {
-                font-size: 1.3rem;
-            }
-        }
-
-        /* Media Query for Small Screens */
-        @media (max-width: 480px) {
-            .header {
-                padding: 0.5em;
-            }
-
-            .header .logo {
-                font-size: 1rem;
-            }
-
-            .header nav a {
-                font-size: 0.8rem;
-            }
-
-            .header nav {
-                gap: 0.5em;
-            }
-        }
-
-        .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            border-radius: 8px;
-            color: black;
-        }
-
-        .close-button {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fernando • Portfólio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: url('images/portfolio_background.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      min-height: 100vh;
+      height: 100%;
+      box-sizing: border-box;
+      overflow-x: hidden;
+      overflow-y: visible;
+    }
+    body {
+      min-height: 100vh;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .lang-switcher-container {
+      position: fixed;
+      top: 14px;
+      left: 18px;
+      z-index: 2100;
+      display: flex;
+      gap: 0.5em;
+    }
+    .lang-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+      font-size: 0.95em;
+      color: #fff;
+      font-family: inherit;
+      padding: 2px 6px;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-btn.selected, .lang-btn:hover {
+      background: rgba(243,156,18,0.15);
+      color: #f39c12;
+    }
+    .lang-btn img {
+      width: 22px;
+      height: 22px;
+      border-radius: 3px;
+      margin-right: 2px;
+      box-shadow: 0 1px 2px #0002;
+    }
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 0.5em 0.2em 0.3em 0.2em;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+    .logo {
+      font-size: 1.02rem;
+      font-weight: bold;
+      margin-bottom: 0.2em;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 1px 2px #000;
+      letter-spacing: 0.5px;
+    }
+    .contacts {
+      display: flex;
+      gap: 0.7em;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .contacts a {
+      text-decoration: none;
+      color: white;
+      font-size: 0.98em;
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      padding: 0;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .contacts a:hover {
+      color: #f39c12;
+      transform: scale(1.08);
+    }
+    .contacts img {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.2em;
+      border-radius: 50%;
+      background: none;
+      object-fit: contain;
+      box-shadow: none;
+      transition: transform 0.2s;
+    }
+    .contacts span {
+      font-size: 0.98em;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      color: #fff;
+      margin-left: 0.1em;
+    }
+    .sections {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-top: 80px;
+    padding: 2em 2vw 2em 2vw;
+    gap: 1vw;
+    width: 90%;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: calc(100vh - 15vh);
+    overflow: hidden;
+    }
+    .section {
+    flex: 1 1 0;
+    margin: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    padding: 0.5em 0.1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    min-height: 0;
+    transition: box-shadow 0.3s, border 0.3s, transform 0.3s;
+    border: 2px solid transparent;
+    overflow: hidden;
+    height: 100%;
+    }
+    .section:hover {
+      border: 2px solid #f39c12;
+      box-shadow: 0 8px 24px rgba(243,156,18,0.18);
+      transform: translateY(-2px) scale(1.01);
+    }
+    .section h2 {
+      font-size: 1.05rem;
+      margin-bottom: 1.1em;
+      color: #fff;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 2px #000;
+    }
+    .section-content {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+    .section.about .section-content,
+    .section.projects .section-content {
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .section.tools .section-content {
+      justify-content: center;
+      align-items: center;
+    }
+    .profile-picture {
+      width: 12vh;
+      border-radius: 50%;
+      margin: 0 auto 0.5em auto;
+      display: block;
+      border: 2px solid rgba(255,255,255,0.8);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+    }
+    .about-text {
+      text-align: justify;
+      font-size: 1.05em;
+      margin-bottom: 0.5em;
+      line-height: 1.5;
+      max-width: 95%;
+    }
+    .tools-groups {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4em 0.7em;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .tools-group {
+      background: rgba(255,255,255,0.07);
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+      padding: 0.3em 0.5em 0.2em 0.5em;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border-left: 4px solid #f39c12;
+      min-width: 0;
+    }
+    .tools-group-label {
+      font-size: 0.97em;
+      font-weight: bold;
+      color: #f39c12;
+      margin-bottom: 0.18em;
+      letter-spacing: 0.5px;
+      text-align: left;
+      width: 100%;
+    }
+    .tools-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.10em;
+      width: 100%;
+    }
+    .tool-item {
+      display: flex;
+      align-items: center;
+      font-size: 0.91em;
+      background: rgba(0,0,0,0.10);
+      border-radius: 6px;
+      padding: 0.08em 0.3em 0.08em 0.13em;
+      color: #fff;
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 0.02em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .tool-item img {
+      width: 16px;
+      height: 16px;
+      margin-right: 0.13em;
+      border-radius: 4px;
+      background: none;
+      object-fit: contain;
+      box-shadow: none;
+    }
+    .projects-list {
+      width: 100%;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 0 auto;
+    }
+    .project-item {
+      display: flex;
+      align-items: flex-start;
+      background: none;
+      border-radius: 10px;
+      padding: 1.1em 0.4em 1.1em 0.4em;
+      gap: 0.2em;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: #fff;
+      position: relative;
+    }
+    .project-item:not(:last-child)::after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      bottom: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #f39c12 60%, transparent);
+      opacity: 0.4;
+    }
+    .project-item:hover {
+      color: #f39c12;
+      background: rgba(243,156,18,0.10);
+      box-shadow: 0 4px 16px rgba(243,156,18,0.13);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .project-item img {
+      width: 22px;
+      height: 22px;
+      border-radius: 8px;
+      object-fit: contain;
+      margin-top: 0.1em;
+      background: none;
+      box-shadow: none;
+    }
+    .project-info {
+      flex: 1;
+      text-align: left;
+    }
+    .project-title {
+      font-weight: bold;
+      font-size: 0.91em;
+      margin-bottom: 0.05em;
+      color: #fff;
+    }
+    .project-desc {
+      font-size: 0.82em;
+      color: #eee;
+      margin: 0;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      border-radius: 8px;
+      color: black;
+    }
+    .close-button {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close-button:hover,
+    .close-button:focus {
+      color: black;
+      text-decoration: none;
+    }
+    .footer-gap {
+      width: 100vw;
+      height: 18px;
+      min-height: 5px;
+      pointer-events: none;
+      user-select: none;
+      background: transparent;
+    }
+    @media (max-width: 1024px) {
+      .sections {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4em;
+        min-height: 0;
+        height: auto;
+        padding-bottom: 0;
+        max-height: none;
+      }
+      .section {
+        margin: 0.15em 0;
+        width: 90vw;
+        min-height: 0;
+        max-height: none;
+      }
+      .tools-groups {
+        max-width: 98vw;
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 700px) {
+      html, body {
+        overflow-x: hidden;
+        overflow-y: visible;
+        height: auto;
+      }
+      .header {
+        padding: 0.2em 0.1em 0.2em 0.1em;
+      }
+      .logo {
+        font-size: 0.93em;
+      }
+      .contacts img {
+        width: 16px;
+        height: 16px;
+      }
+      .sections {
+        padding: 0.2em 0.1em 0 0.1em;
+        gap: 0.2em;
+        height: auto;
+        min-height: 0;
+        flex-direction: column;
+        max-height: none;
+      }
+      .section {
+        padding: 0.2em 0.1em;
+        width: 98vw;
+        margin: 0.1em auto;
+      }
+      .tools-groups, .projects-list {
+        max-width: 98vw;
+      }
+      .lang-switcher-container {
+        top: 6px;
+        left: 6px;
+        font-size: 0.9em;
+      }
+      .footer-gap {
+        height: 8px;
+        min-height: 3px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">Fernando Falat • Cientista de Dados • Bioinformata • Engenheiro de Bioprocessos e Biotecnologia</div>
-        <nav>
-            <a href="https://github.com/falatfernando" target="_blank">
-                <img src="images/github_icon.png" alt="GitHub">
-                GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/fernandofalat/" target="_blank">
-                <img src="images/linkedin_icon.png" alt="LinkedIn">
-                LinkedIn
-            </a>
-            <a href="mailto:fernandofalat@proton.me">
-                <img src="images/email_icon.png" alt="Email">
-                Email
-            </a>
-            <a href="https://lattes.cnpq.br" target="_blank">
-                <img src="images/lattes_icon.png" alt="Lattes">
-                Lattes
-            </a>
-        </nav>
+  <!-- Language Switcher -->
+  <div class="lang-switcher-container">
+    <button class="lang-btn selected" id="btn-pt" aria-label="Português (Brasil)">
+      <img src="images/flag_br.png" alt="PT-BR">PT-BR
+    </button>
+    <button class="lang-btn" id="btn-en" aria-label="English (US)">
+      <img src="images/flag_us.png" alt="EN-US">EN-US
+    </button>
+  </div>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo" data-lang="header-title">
+      Fernando Falat • Cientista de Dados • Bioinformata • Engenheiro de Bioprocessos e Biotecnologia
     </div>
-    <div class="sections">
-        <div class="section">
-            <h2>Sobre Mim</h2>
-            <img class="profile-picture" src="images/profile_picture.jpg" alt="Profile Picture">
-            <p style = 'text-align: center;'>Profissional sênior apaixonado por ciências da vida e tecnologia 🧬</p>
-            <p>Engenheiro de Bioprocessos e Biotecnologia pela Universidade Positivo, Especialista em Data Science & Analytics pela USP/ESALQ e Mestrando em Bioinformática aplicada à Microbiologia pela USP/ICB.</p>
-            <p>Certificado em Ciência de Dados Aplicada à Genômica pela Johns Hopkins University.</p>
-        </div>
-        <div class="section">
-            <h2>Ferramentas</h2>
-            <div class="tools">
-                <a href="https://www.python.org/" class="tool">
-                    <img src="images/python.png" alt="Python">
-                    Python
-                </a>
-                <a href="https://www.r-project.org/" class="tool">
-                    <img src="images/r.png" alt="R">
-                    R
-                </a>
-                <a href="https://learn.microsoft.com/pt-br/shows/azure-developers/what-is-sql-server-sql-tips-for-developers-0101" class="tool">
-                    <img src="images/sql-server.png" alt="SQL Server">
-                    SQL Server
-                </a>
-                <a href="https://www.databricks.com/" class="tool">
-                    <img src="images/databricks.png" alt="Databricks">
-                    Databricks
-                </a>
-                <a href="https://daxstudio.org/" class="tool">
-                    <img src="images/dax.png" alt="DAX e M">
-                    DAX e M
-                </a>
-                <a href="https://www.typescriptlang.org/" class="tool">
-                    <img src="images/typescript.png" alt="TypeScript">
-                    TypeScript
-                </a>
-                <a href="https://www.docker.com/" class="tool">
-                    <img src="images/docker.png" alt="Docker">
-                    Docker
-                </a>
-                    <a href="https://www.microsoft.com/pt-br/power-platform/products/power-bi/getting-started-with-power-bi" class="tool">
-                        <img src="images/power-bi.png" alt="Power BI">
-                        Power BI
-                    </a>
-                    <a href="https://streamlit.io/" class="tool">
-                        <img src="images/streamlit.png" alt="Streamlit">
-                        Streamlit
-                    </a>
-                    <a href="https://plotly.com/" class="tool">
-                        <img src="images/plotly.png" alt="Dash">
-                        Dash Plotly
-                    </a>
-                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" class="tool">
-                        <img src="images/html_css.png" alt="HTML e CSS">
-                        HTML e CSS
-                    </a>
-                    <a href="https://www.djangoproject.com/" class="tool">
-                        <img src="images/django.png" alt="Flask">
-                        Django
-                    </a>
-            </div>
-        </div>
-        <div class="section">
-            <h2>Projetos</h2>
-            <div class="projects">
-                <a href="https://preprot.streamlit.app" class="project">
-                    <img src="images/preprot_icon.png" alt="PreProt">
-                    <div>
-                        <span><b>PreProt</b></span>
-                        <p class="project-description">Aplicativo para predição de proteínas de <i>E. coli</i> através de machine learning.</p>
-                    </div>
-                </a>
-                <a href="https://falat-covidpipeline.streamlit.app/" class="project">
-                    <img src="images/covid_icon.png" alt="Pipeline COVID">
-                    <div>
-                        <span><b>Pipeline COVID</b></span>
-                        <p class="project-description">Aplicativo com pipeline automatizado para triagem de medicamentos contra COVID-19 através de machine learning.</p>
-                    </div>
-                </a>
-                <a href="#ml-models" class="project">
-                    <img src="images/ml_icon.png" alt="Modelos de Inteligência Artifical">
-                    <div>
-                        <span><b>Modelos de Inteligência Artifical</b></span>
-                        <p class="project-description">Criação e implementação de modelos de machine learning e deep learning voltados para aplicações industriais, corporativas e científicas.</p>
-                    </div>
-                </a>
-                <a href="#dashboards" class="project">
-                    <img src="images/dashboard_icon.png" alt="Dashboards">
-                    <div>
-                        <span><b>Dashboards</b></span>
-                        <p class="project-description">Transformando dados complexos em insights através de visualizações interativas e dinâmicas através do Power BI, Streamlit e Dash Plotly.</p>
-                    </div>
-                </a>
-                <a href="#automacoes" class="project">
-                    <img src="images/automation.png" alt="Dashboards">
-                    <div>
-                        <span><b>Automações</b></span>
-                        <p class="project-description">Automações de rotinas repetitivas e webscraping!</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div id="popup-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2 id="popup-title"></h2>
-                <p id="popup-text"></p>
-            </div>
-        </div>
+    <div class="contacts">
+      <a href="https://github.com/falatfernando" target="_blank">
+        <img src="images/github_icon.png" alt="GitHub"><span>GitHub</span>
+      </a>
+      <a href="https://www.linkedin.com/in/fernandofalat/" target="_blank">
+        <img src="images/linkedin_icon.png" alt="LinkedIn"><span>LinkedIn</span>
+      </a>
+      <a href="mailto:fernandofalat@proton.me">
+        <img src="images/email_icon.png" alt="Email"><span>Email</span>
+      </a>
+      <a href="http://lattes.cnpq.br/9325530786682187" target="_blank">
+        <img src="images/lattes_icon.png" alt="Lattes"><span>Lattes</span>
+      </a>
     </div>
-    <script>
-        // Modal and close elements
-        const modal = document.getElementById("popup-modal");
-        const modalTitle = document.getElementById("popup-title");
-        const modalText = document.getElementById("popup-text");
-        const closeButton = document.querySelector(".close-button");
-    
-        // Text for each popup
-        const popups = {
-            "Modelos de Inteligência Artifical": "Desenvolvimento de aplicativos de machine learning como o PreProt e Pipeline COVID-19, além de modelos de deep learning para aplicações industriais na BRF S.A.",
-            "Dashboards": "Desenvolvimento de arquiteturas de dados e soluções de business intelligence para análise de dados complexos e tomada de decisão para a alta liderança e analistas de negócio da BRF S.A.",
-            "Automações": "Desenvolvimento de webcrawlers e automações de rotinas repetitivas através do Python e Power Automate.",
-        };
-    
-        // Event listener for links
-        document.querySelectorAll("a[href='#ml-models'], a[href='#dashboards'], a[href='#automacoes']").forEach(link => {
-            link.addEventListener("click", (event) => {
-                event.preventDefault();
-                const textKey = link.querySelector("div > span").textContent;
-                modalTitle.textContent = textKey;
-                modalText.textContent = popups[textKey];
-                modal.style.display = "block";
-            });
-        });
-    
-        // Close modal
-        closeButton.addEventListener("click", () => {
-            modal.style.display = "none";
-        });
-    
-        // Close modal when clicking outside of it
-        window.addEventListener("click", (event) => {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        });
-    </script>    
+  </div>
+  <!-- Main Sections -->
+  <div class="sections">
+    <!-- About -->
+    <div class="section about">
+      <h2 data-lang="about-title">Sobre Mim</h2>
+      <div class="section-content">
+        <img class="profile-picture" src="images/profile_picture.jpg" alt="Profile Picture">
+        <div class="about-text" data-lang="about-subtitle">Profissional sênior apaixonado por ciências da vida e tecnologia 🧬</div>
+        <div class="about-text" data-lang="about-text-1">Engenheiro de Bioprocessos e Biotecnologia pela Universidade Positivo, Especialista em Data Science & Analytics pela USP/ESALQ e Mestrando em Bioinformática aplicada à Microbiologia pela USP/ICB.</div>
+        <div class="about-text" data-lang="about-text-2">Certificado em Ciência de Dados Aplicada à Genômica pela Johns Hopkins University.</div>
+      </div>
+    </div>
+    <!-- Tools -->
+    <div class="section tools">
+      <h2 data-lang="tools-title">Ferramentas</h2>
+      <div class="section-content">
+        <div class="tools-groups">
+          <div class="tools-group">
+            <div class="tools-group-label" data-lang="tools-systems">Sistemas</div>
+            <div class="tools-list">
+              <span class="tool-item"><img src="images/linux.png" alt="Linux">Linux</span>
+              <span class="tool-item"><img src="images/windows.png" alt="Windows">Windows</span>
+            </div>
+          </div>
+          <div class="tools-group">
+            <div class="tools-group-label" data-lang="tools-cloud">Cloud & Infraestrutura</div>
+            <div class="tools-list">
+              <span class="tool-item"><img src="images/azure.png" alt="Azure">Azure</span>
+              <span class="tool-item"><img src="images/aws.png" alt="AWS">AWS</span>
+              <span class="tool-item"><img src="images/docker.png" alt="Docker">Docker</span>
+              <span class="tool-item"><img src="images/nextflow.png" alt="nextflow">Nextflow</span>
+            </div>
+          </div>
+          <div class="tools-group">
+            <div class="tools-group-label" data-lang="tools-languages">Linguagens de Programação</div>
+            <div class="tools-list">
+              <span class="tool-item"><img src="images/python.png" alt="Python">Python</span>
+              <span class="tool-item"><img src="images/r.png" alt="R">R</span>
+              <span class="tool-item"><img src="images/javascript.png" alt="JavaScript">JavaScript</span>
+              <span class="tool-item"><img src="images/typescript.png" alt="TypeScript">TypeScript</span>
+              <span class="tool-item"><img src="images/html_css.png" alt="HTML/CSS">HTML/CSS</span>
+            </div>
+          </div>
+          <div class="tools-group">
+            <div class="tools-group-label" data-lang="tools-ai">IA & Machine Learning</div>
+            <div class="tools-list">
+              <span class="tool-item"><img src="images/tensorflow.png" alt="TensorFlow">TensorFlow</span>
+              <span class="tool-item"><img src="images/pytorch.png" alt="PyTorch">PyTorch</span>
+              <span class="tool-item"><img src="images/scikit.png" alt="Scikit-learn">Scikit-learn</span>
+              <span class="tool-item"><img src="images/huggingface.png" alt="Hugging Face">Hugging Face</span>
+            </div>
+          </div>
+          <div class="tools-group">
+            <div class="tools-group-label" data-lang="tools-data">Dados & Bancos de Dados</div>
+            <div class="tools-list">
+              <span class="tool-item"><img src="images/postgresql.png" alt="PostgreSQL">PostgreSQL</span>
+              <span class="tool-item"><img src="images/mysql.png" alt="MySQL">MySQL</span>
+              <span class="tool-item"><img src="images/bigquery.png" alt="BigQuery">BigQuery</span>
+              <span class="tool-item"><img src="images/sql-server.png" alt="SQL Server">SQL Server</span>
+              <span class="tool-item"><img src="images/databricks.png" alt="Databricks">Databricks</span>
+            </div>
+          </div>
+          <div class="tools-group">
+            <div class="tools-group-label" data-lang="tools-visualization">Visualização de Dados</div>
+            <div class="tools-list">
+              <span class="tool-item"><img src="images/power-bi.png" alt="Power BI">Power BI</span>
+              <span class="tool-item"><img src="images/plotly.png" alt="Plotly">Plotly</span>
+              <span class="tool-item"><img src="images/streamlit.png" alt="Streamlit">Streamlit</span>
+              <span class="tool-item"><img src="images/dax.png" alt="DAX">DAX</span>
+              <span class="tool-item"><img src="images/m.png" alt="M">M (Power Query)</span>
+            </div>
+          </div>
+          <div class="tools-group">
+            <div class="tools-group-label" data-lang="tools-frameworks">Frameworks</div>
+            <div class="tools-list">
+              <span class="tool-item"><img src="images/django.png" alt="Django">Django</span>
+              <span class="tool-item"><img src="images/react.png" alt="React">React</span>
+            </div>
+          </div>
+          <div class="tools-group">
+            <div class="tools-group-label" data-lang="tools-integration">Integração & Segurança</div>
+            <div class="tools-list">
+              <span class="tool-item"><img src="images/api.png" alt="REST APIs">REST APIs</span>
+              <span class="tool-item"><img src="images/oauth.png" alt="OAuth2">OAuth2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Projects -->
+    <div class="section projects">
+      <h2 data-lang="projects-title">Projetos</h2>
+      <div class="section-content">
+        <div class="projects-list">
+          <a href="https://preprot.streamlit.app" class="project-item" target="_blank">
+            <img src="images/preprot_icon.png" alt="PreProt">
+            <div class="project-info">
+              <div class="project-title">PreProt</div>
+              <div class="project-desc" data-lang="project-preprot">Aplicativo para predição de proteínas de <i>E. coli</i> através de machine learning.</div>
+            </div>
+          </a>
+          <a href="https://falat-covidpipeline.streamlit.app/" class="project-item" target="_blank">
+            <img src="images/covid_icon.png" alt="Pipeline COVID">
+            <div class="project-info">
+              <div class="project-title">Pipeline COVID</div>
+              <div class="project-desc" data-lang="project-covid">Aplicativo com pipeline automatizado para triagem de medicamentos contra COVID-19 através de machine learning.</div>
+            </div>
+          </a>
+          <a href="#" class="project-item" onclick="showModal('ml')">
+            <img src="images/ml_icon.png" alt="Modelos de Inteligência Artifical">
+            <div class="project-info">
+              <div class="project-title" data-lang="project-ml-title">Modelos de Inteligência Artifical</div>
+              <div class="project-desc" data-lang="project-ml-desc">Criação e implementação de modelos de machine learning e deep learning voltados para aplicações industriais, corporativas e científicas.</div>
+            </div>
+          </a>
+          <a href="#" class="project-item" onclick="showModal('dashboards')">
+            <img src="images/dashboard_icon.png" alt="Dashboards">
+            <div class="project-info">
+              <div class="project-title">Dashboards</div>
+              <div class="project-desc" data-lang="project-dashboards">Transformando dados complexos em insights através de visualizações interativas e dinâmicas através do Power BI, Streamlit e Dash Plotly.</div>
+            </div>
+          </a>
+          <a href="#" class="project-item" onclick="showModal('automation')">
+            <img src="images/automation.png" alt="Automações">
+            <div class="project-info">
+              <div class="project-title" data-lang="project-automation-title">Automações</div>
+              <div class="project-desc" data-lang="project-automation-desc">Automações de rotinas repetitivas e webscraping!</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-gap"></div>
+  <div id="popup-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal()">&times;</span>
+      <h2 id="popup-title"></h2>
+      <p id="popup-text"></p>
+    </div>
+  </div>
+  <script>
+    // Language translations
+    const translations = {
+      'pt-br': {
+        'header-title': 'Fernando Falat • Cientista de Dados • Bioinformata • Engenheiro de Bioprocessos e Biotecnologia',
+        'about-title': 'Sobre Mim',
+        'about-subtitle': 'Profissional sênior apaixonado por ciências da vida e tecnologia 🧬',
+        'about-text-1': 'Engenheiro de Bioprocessos e Biotecnologia pela Universidade Positivo, Especialista em Data Science & Analytics pela USP/ESALQ e Mestrando em Bioinformática aplicada à Microbiologia pela USP/ICB.',
+        'about-text-2': 'Certificado em Ciência de Dados Aplicada à Genômica pela Johns Hopkins University.',
+        'tools-title': 'Ferramentas',
+        'tools-systems': 'Sistemas',
+        'tools-cloud': 'Cloud & Infraestrutura',
+        'tools-languages': 'Linguagens de Programação',
+        'tools-ai': 'IA & Machine Learning',
+        'tools-data': 'Dados & Bancos de Dados',
+        'tools-visualization': 'Visualização de Dados',
+        'tools-frameworks': 'Frameworks',
+        'tools-integration': 'Integração & Segurança',
+        'projects-title': 'Projetos',
+        'project-preprot': 'Aplicativo para predição de proteínas de <i>E. coli</i> através de machine learning.',
+        'project-covid': 'Aplicativo com pipeline automatizado para triagem de medicamentos contra COVID-19 através de machine learning.',
+        'project-ml-title': 'Modelos de Inteligência Artifical',
+        'project-ml-desc': 'Criação e implementação de modelos de machine learning e deep learning voltados para aplicações industriais, corporativas e científicas.',
+        'project-dashboards': 'Transformando dados complexos em insights através de visualizações interativas e dinâmicas através do Power BI, Streamlit e Dash Plotly.',
+        'project-automation-title': 'Automações',
+        'project-automation-desc': 'Automações de rotinas repetitivas e webscraping!'
+      },
+      'en-us': {
+        'header-title': 'Fernando Falat • Data Scientist • Bioinformatician • Bioprocess and Biotechnology Engineer',
+        'about-title': 'About Me',
+        'about-subtitle': 'Senior professional passionate about life sciences and technology 🧬',
+        'about-text-1': "Bioprocess and Biotechnology Engineer from Positivo University, Specialist in Data Science & Analytics from USP/ESALQ, and Master's student in Bioinformatics applied to Microbiology at USP/ICB.",
+        'about-text-2': 'Certified in Data Science Applied to Genomics by Johns Hopkins University.',
+        'tools-title': 'Tools',
+        'tools-systems': 'Systems',
+        'tools-cloud': 'Cloud & Infrastructure',
+        'tools-languages': 'Programming Languages',
+        'tools-ai': 'AI & Machine Learning',
+        'tools-data': 'Data & Databases',
+        'tools-visualization': 'Data Visualization',
+        'tools-frameworks': 'Frameworks',
+        'tools-integration': 'Integration & Security',
+        'projects-title': 'Projects',
+        'project-preprot': 'Application for predicting <i>E. coli</i> proteins using machine learning.',
+        'project-covid': 'Application with automated pipeline for COVID-19 drug screening using machine learning.',
+        'project-ml-title': 'Artificial Intelligence Models',
+        'project-ml-desc': 'Creation and implementation of machine learning and deep learning models focused on industrial, corporate, and scientific applications.',
+        'project-dashboards': 'Transforming complex data into insights through interactive and dynamic visualizations using Power BI, Streamlit, and Dash Plotly.',
+        'project-automation-title': 'Automations',
+        'project-automation-desc': 'Automation of repetitive routines and webscraping!'
+      }
+    };
+    let currentLang = 'pt-br';
+    const btnPT = document.getElementById('btn-pt');
+    const btnEN = document.getElementById('btn-en');
+    function updateLanguage(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-lang]').forEach(element => {
+        const key = element.getAttribute('data-lang');
+        if (translations[lang][key]) {
+          element.innerHTML = translations[lang][key];
+        }
+      });
+      // Update button styles
+      if (lang === 'pt-br') {
+        btnPT.classList.add('selected');
+        btnEN.classList.remove('selected');
+      } else {
+        btnEN.classList.add('selected');
+        btnPT.classList.remove('selected');
+      }
+    }
+    btnPT.addEventListener('click', () => {
+      if (currentLang !== 'pt-br') {
+        currentLang = 'pt-br';
+        updateLanguage(currentLang);
+      }
+    });
+    btnEN.addEventListener('click', () => {
+      if (currentLang !== 'en-us') {
+        currentLang = 'en-us';
+        updateLanguage(currentLang);
+      }
+    });
+    updateLanguage('pt-br');
+    function showModal(type) {
+      const modal = document.getElementById("popup-modal");
+      const title = document.getElementById("popup-title");
+      const text = document.getElementById("popup-text");
+      const modalContent = {
+        'ml': {
+          'pt-br': {
+            title: 'Modelos de Inteligência Artifical',
+            text: 'Desenvolvimento de aplicativos de machine learning como o PreProt e Pipeline COVID-19, além de modelos de deep learning para aplicações industriais na BRF S.A.'
+          },
+          'en-us': {
+            title: 'Artificial Intelligence Models',
+            text: 'Development of machine learning applications such as PreProt and COVID-19 Pipeline, as well as deep learning models for industrial applications at BRF S.A.'
+          }
+        },
+        'dashboards': {
+          'pt-br': {
+            title: 'Dashboards',
+            text: 'Desenvolvimento de arquiteturas de dados e soluções de business intelligence para análise de dados complexos e tomada de decisão para a alta liderança e analistas de negócio da BRF S.A.'
+          },
+          'en-us': {
+            title: 'Dashboards',
+            text: 'Development of data architectures and business intelligence solutions for complex data analysis and decision making for senior leadership and business analysts at BRF S.A.'
+          }
+        },
+        'automation': {
+          'pt-br': {
+            title: 'Automações',
+            text: 'Desenvolvimento de webcrawlers e automações de rotinas repetitivas através do Python e Power Automate.'
+          },
+          'en-us': {
+            title: 'Automations',
+            text: 'Development of webcrawlers and automation of repetitive routines using Python and Power Automate.'
+          }
+        }
+      };
+      title.textContent = modalContent[type][currentLang].title;
+      text.textContent = modalContent[type][currentLang].text;
+      modal.style.display = "block";
+    }
+    function closeModal() {
+      document.getElementById("popup-modal").style.display = "none";
+    }
+    window.onclick = function(event) {
+      const modal = document.getElementById("popup-modal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
 </body>
 </html>
