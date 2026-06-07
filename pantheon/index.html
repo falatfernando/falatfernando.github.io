@@ -256,7 +256,7 @@
 
         /* Screen & Tabs */
         .phone-screen {
-            padding: 30px 16px 48px 16px;
+            padding: 30px 16px 20px 16px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -939,7 +939,27 @@
                 margin: 0 auto;
             }
             h1 {
-                font-size: 36px;
+                font-size: 32px;
+            }
+        }
+        @media(max-width: 520px) {
+            .nav-header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: center;
+                padding-bottom: 12px;
+            }
+            .logo-symbol {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .logo-text-main {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+            .logo-text-sub {
+                font-size: 9px;
+                padding-left: 8px;
             }
         }
     </style>
@@ -1077,39 +1097,95 @@
                     <!-- TAB 1: Splits list (TEMPLO) - SPLITS SCREEN -->
                     <div id="mock-tab-splits" class="mock-tab-content">
                         <div class="screen-header-bar">
-                            <span class="screen-header-title">🔱 TEMPLO</span>
+                            <span class="screen-header-title">PLANILHAS</span>
                             <span style="font-weight: bold; font-size: 8px;">100%</span>
                         </div>
                         
-                        <div class="mock-split-list">
-                            <div class="mock-split-card">
-                                <div class="mock-split-name">A: EMPURRAR (PUSH)</div>
-                                <div class="mock-split-sub" id="mock-split-sub-a">4 Exercícios • Supino, Militar...</div>
+                        <div class="mock-plan-list" style="display: flex; flex-direction: column; gap: 8px; text-align: left; width: 100%;">
+                            <!-- Plan Card (Active & Expanded) -->
+                            <div class="mock-plan-container active" style="background-color: #0A0A0A; border: 1px solid var(--accent-color); border-radius: 12px; padding: 10px;">
+                                <div class="mock-plan-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div class="plan-info">
+                                        <div class="plan-title-row" style="display: flex; align-items: center; gap: 6px;">
+                                            <span style="font-size: 10px; font-weight: bold; color: #FFF;">🔱 PANTHEON ALPHA</span>
+                                            <span style="font-size: 6px; background-color: #90EE90; color: #000; padding: 1px 3.5px; border-radius: 4px; font-weight: 900; letter-spacing: 0.5px;">ATIVO</span>
+                                        </div>
+                                        <span style="font-size: 7px; color: var(--text-secondary); font-weight: bold;">3 DIVISÕES</span>
+                                    </div>
+                                    <span style="font-size: 8px; color: #666;">▲</span>
+                                </div>
+                                
+                                <!-- Splits List inside Expanded Plan -->
+                                <div class="mock-splits-sublist" style="margin-top: 8px; border-top: 1px solid #151515; padding-top: 8px; display: flex; flex-direction: column; gap: 6px;">
+                                    <!-- Split Item A -->
+                                    <div class="mock-split-row" style="display: flex; justify-content: space-between; align-items: center; background-color: #050505; border: 1px solid #151515; padding: 6px 8px; border-radius: 8px;">
+                                        <div style="display: flex; align-items: center; gap: 6px;">
+                                            <div style="display: flex; flex-direction: column; font-size: 6px; color: var(--accent-color); gap: 1px; font-weight: bold; line-height: 1;">
+                                                <span>▲</span><span>▼</span>
+                                            </div>
+                                            <span style="font-size: 8.5px; font-weight: bold; color: #FFF;">A: EMPURRAR</span>
+                                        </div>
+                                        <span id="mock-split-sub-a" style="font-size: 7px; color: var(--text-secondary); font-weight: bold;">4 EXERCÍCIOS</span>
+                                    </div>
+                                    <!-- Split Item B -->
+                                    <div class="mock-split-row" style="display: flex; justify-content: space-between; align-items: center; background-color: #050505; border: 1px solid #151515; padding: 6px 8px; border-radius: 8px;">
+                                        <div style="display: flex; align-items: center; gap: 6px;">
+                                            <div style="display: flex; flex-direction: column; font-size: 6px; color: var(--accent-color); gap: 1px; font-weight: bold; line-height: 1;">
+                                                <span>▲</span><span>▼</span>
+                                            </div>
+                                            <span style="font-size: 8.5px; font-weight: bold; color: #FFF;">B: PUXAR</span>
+                                        </div>
+                                        <span id="mock-split-sub-b" style="font-size: 7px; color: var(--text-secondary); font-weight: bold;">4 EXERCÍCIOS</span>
+                                    </div>
+                                    <!-- Split Item C -->
+                                    <div class="mock-split-row" style="display: flex; justify-content: space-between; align-items: center; background-color: #050505; border: 1px solid #151515; padding: 6px 8px; border-radius: 8px;">
+                                        <div style="display: flex; align-items: center; gap: 6px;">
+                                            <div style="display: flex; flex-direction: column; font-size: 6px; color: var(--accent-color); gap: 1px; font-weight: bold; line-height: 1;">
+                                                <span>▲</span><span>▼</span>
+                                            </div>
+                                            <span style="font-size: 8.5px; font-weight: bold; color: #FFF;">C: PERNAS</span>
+                                        </div>
+                                        <span id="mock-split-sub-c" style="font-size: 7px; color: var(--text-secondary); font-weight: bold;">5 EXERCÍCIOS</span>
+                                    </div>
+                                </div>
                             </div>
                             
-                            <div class="mock-split-card">
-                                <div class="mock-split-name">B: PUXAR (PULL)</div>
-                                <div class="mock-split-sub" id="mock-split-sub-b">4 Exercícios • Terra, Remada...</div>
+                            <!-- Plan Card (Collapsed) -->
+                            <div class="mock-plan-container" style="background-color: #0A0A0A; border: 1px solid #151515; border-radius: 12px; padding: 8px 10px;">
+                                <div class="mock-plan-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div class="plan-info">
+                                        <span style="font-size: 10px; font-weight: bold; color: #888;">🦁 ARNOLD SPLIT</span>
+                                        <div style="font-size: 7px; color: var(--text-secondary); font-weight: bold; margin-top: 2px;">6 DIVISÕES</div>
+                                    </div>
+                                    <span style="font-size: 8px; color: #444;">▼</span>
+                                </div>
                             </div>
 
-                            <div class="mock-split-card">
-                                <div class="mock-split-name">C: PERNAS (LEGS)</div>
-                                <div class="mock-split-sub" id="mock-split-sub-c">5 Exercícios • Agachamento, Leg...</div>
+                            <!-- Plan Card 3 (Collapsed) -->
+                            <div class="mock-plan-container" style="background-color: #0A0A0A; border: 1px solid #151515; border-radius: 12px; padding: 8px 10px;">
+                                <div class="mock-plan-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div class="plan-info">
+                                        <span style="font-size: 10px; font-weight: bold; color: #888;">💪 BRO SPLIT</span>
+                                        <div style="font-size: 7px; color: var(--text-secondary); font-weight: bold; margin-top: 2px;">5 DIVISÕES</div>
+                                    </div>
+                                    <span style="font-size: 8px; color: #444;">▼</span>
+                                </div>
                             </div>
-
-                            <div class="mock-split-card-dashed" id="mock-add-split">
-                                + CRIAR PLANILHA
+                            
+                            <!-- Dashed New Plan Button -->
+                            <div class="mock-split-card-dashed" id="mock-add-split" style="padding: 10px; font-size: 8px; letter-spacing: 0.5px; border-radius: 12px;">
+                                + NOVO PLANO DE TREINO
                             </div>
                         </div>
                     </div>
-
+ 
                     <!-- TAB 2: Active Workout Screen (FORJA) - ACTIVE WORKOUT -->
                     <div id="mock-tab-workout" class="mock-tab-content">
                         <div class="screen-header-bar">
                             <span class="screen-header-title" id="mock-workout-header">FORJA • EMPURRAR</span>
                             <span style="font-weight: bold; font-size: 8px; color: var(--accent-color);">● ATIVO</span>
                         </div>
-
+ 
                         <!-- Rest Timer countdown simulation -->
                         <div class="mock-timer">
                             <div class="mock-timer-top">
@@ -1121,7 +1197,7 @@
                                 <div class="mock-timer-progress"></div>
                             </div>
                         </div>
-
+ 
                         <!-- Active Superset Exercise card -->
                         <div class="mock-exercise-card">
                             <div class="mock-superset-tag">
@@ -1160,7 +1236,7 @@
                                 </span>
                             </div>
                         </div>
-
+ 
                         <!-- Swipe swap HUD -->
                         <div class="mock-hud">
                             <div style="display: flex; flex-direction: column; gap: 2px; text-align: left;">
@@ -1170,14 +1246,14 @@
                             <span style="font-size: 16px;">⇄</span>
                         </div>
                     </div>
-
+ 
                     <!-- TAB 3: Select Plan Screen (SELECIONAR PLANILHA) -->
                     <div id="mock-tab-select-plan" class="mock-tab-content">
                         <div class="screen-header-bar">
                             <span class="screen-header-title" id="mock-select-plan-header">PLANILHAS</span>
                             <span style="font-weight: bold; font-size: 8px;">100%</span>
                         </div>
-
+ 
                         <div class="mock-plan-option-list">
                             <div class="mock-plan-option-card active">
                                 <div class="plan-info">
@@ -1194,7 +1270,7 @@
                                 </div>
                                 <div class="mock-plan-badge" id="mock-badge-select">SELECIONAR</div>
                             </div>
-
+ 
                             <div class="mock-plan-option-card">
                                 <div class="plan-info">
                                     <h4 id="mock-bro-title">💪 BRO SPLIT</h4>
@@ -1204,45 +1280,75 @@
                             </div>
                         </div>
                     </div>
-
+ 
                     <!-- TAB 4: Plan Forger Screen (FORJADOR DE TREINO) -->
                     <div id="mock-tab-forger" class="mock-tab-content">
                         <div class="screen-header-bar">
                             <span class="screen-header-title" id="mock-forger-header">FORJADOR</span>
-                            <span style="font-weight: bold; font-size: 8px;">100%</span>
+                            <span style="font-weight: bold; font-size: 8px; color: var(--accent-color);">✔ SALVAR</span>
                         </div>
-
-                        <div class="mock-forger-container">
+ 
+                        <div class="mock-forger-container" style="display: flex; flex-direction: column; gap: 8px; text-align: left; width: 100%;">
                             <div>
-                                <div class="mock-input-label" id="mock-forger-label-name">Nome do Treino</div>
-                                <input class="mock-text-input" id="mock-forger-input-val" value="A: EMPURRAR" readonly>
+                                <div class="mock-input-label" id="mock-forger-label-name" style="font-size: 7px; font-weight: 900;">Nome do Treino</div>
+                                <input class="mock-text-input" id="mock-forger-input-val" style="padding: 6px 8px; font-size: 9px;" value="A: EMPURRAR" readonly>
                             </div>
-
-                            <div class="mock-forger-exercise-item">
-                                <div class="mock-forger-ex-header">
-                                    <span class="mock-forger-ex-name" id="mock-forger-ex1">1. Supino Reto</span>
-                                    <span style="font-size: 7px; color: var(--text-secondary); font-weight: bold;">FORÇA</span>
+ 
+                            <div style="border-left: 2px solid var(--accent-color); padding-left: 6px; display: flex; flex-direction: column; gap: 6px;">
+                                <!-- Exercise Item 1 (Superset linked) -->
+                                <div class="mock-forger-exercise-item" style="padding: 8px; border-radius: 10px; gap: 2px; border: 1px solid #1A1A1A; background-color: #0A0A0A;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span class="mock-forger-ex-name" id="mock-forger-ex1" style="font-size: 9px; font-weight: bold; color: #FFF;">1. Supino Reto</span>
+                                        <span style="font-size: 7px; color: #FF6B6B;">🗑</span>
+                                    </div>
+                                    <div style="display: flex; gap: 8px; align-items: center; margin-top: 2px;">
+                                        <div style="font-size: 7px; color: var(--text-secondary);">SÉRIES: <span style="color:#FFF; font-weight:bold;">- 4 +</span></div>
+                                        <div style="font-size: 7px; color: var(--text-secondary);">REPS: <span style="color:#FFF; font-weight:bold;">10</span></div>
+                                        <div style="font-size: 7px; color: var(--text-secondary);">REST: <span style="color:#FFF; font-weight:bold;">90s</span></div>
+                                    </div>
+                                    <div id="mock-forger-toggle-link" style="font-size: 7px; color: #90EE90; margin-top: 2px; font-weight: bold; display: flex; align-items: center; gap: 4px;">
+                                        <span>🔗 LINKADO COM PRÓXIMO</span>
+                                    </div>
                                 </div>
-                                <div class="mock-forger-link-toggle" id="mock-forger-toggle-link">
-                                    🔗 LINKAR COM PRÓXIMO
+ 
+                                <!-- Exercise Item 2 (Superset linked target) -->
+                                <div class="mock-forger-exercise-item" style="padding: 8px; border-radius: 10px; gap: 2px; border: 1px dashed #333; background-color: #050505;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span class="mock-forger-ex-name" id="mock-forger-ex2" style="font-size: 9px; font-weight: bold; color: #FFF;">2. Desenvolvimento Militar</span>
+                                        <span style="font-size: 7px; color: #FF6B6B;">🗑</span>
+                                    </div>
+                                    <div style="display: flex; gap: 8px; align-items: center; margin-top: 2px;">
+                                        <div style="font-size: 7px; color: var(--text-secondary);">SÉRIES: <span style="color:#FFF; font-weight:bold;">- 3 +</span></div>
+                                        <div style="font-size: 7px; color: var(--text-secondary);">REPS: <span style="color:#FFF; font-weight:bold;">10</span></div>
+                                        <div style="font-size: 7px; color: var(--text-secondary);">REST: <span style="color:#FFF; font-weight:bold;">90s</span></div>
+                                    </div>
                                 </div>
-                                <div class="mock-forger-ex-header" style="margin-top: 4px; border-top: 1px solid #111; padding-top: 6px;">
-                                    <span class="mock-forger-ex-name" id="mock-forger-ex2">2. Desenvolvimento Militar</span>
-                                    <span style="font-size: 7px; color: var(--text-secondary); font-weight: bold;">FORÇA</span>
+ 
+                                <!-- Exercise Item 3 -->
+                                <div class="mock-forger-exercise-item" style="padding: 8px; border-radius: 10px; gap: 2px; border: 1px solid #1A1A1A; background-color: #0A0A0A;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span class="mock-forger-ex-name" id="mock-forger-ex3" style="font-size: 9px; font-weight: bold; color: #FFF;">3. Elevação Lateral</span>
+                                        <span style="font-size: 7px; color: #FF6B6B;">🗑</span>
+                                    </div>
+                                    <div style="display: flex; gap: 8px; align-items: center; margin-top: 2px;">
+                                        <div style="font-size: 7px; color: var(--text-secondary);">SÉRIES: <span style="color:#FFF; font-weight:bold;">- 3 +</span></div>
+                                        <div style="font-size: 7px; color: var(--text-secondary);">REPS: <span style="color:#FFF; font-weight:bold;">12</span></div>
+                                        <div style="font-size: 7px; color: var(--text-secondary);">REST: <span style="color:#FFF; font-weight:bold;">60s</span></div>
+                                    </div>
+                                    <div style="font-size: 7px; color: #444; margin-top: 2px; font-weight: bold; display: flex; align-items: center; gap: 4px;">
+                                        <span>🔗 LINKAR COM PRÓXIMO</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mock-split-card-dashed" style="padding: 6px; font-size: 7.5px; border-radius: 10px;">
+                                    + ADICIONAR EXERCÍCIO
                                 </div>
                             </div>
-
-                            <div class="mock-forger-exercise-item">
-                                <div class="mock-forger-ex-header">
-                                    <span class="mock-forger-ex-name" id="mock-forger-ex3">3. Elevação Lateral</span>
-                                    <span style="font-size: 7px; color: var(--text-secondary); font-weight: bold;">FORÇA</span>
-                                </div>
-                            </div>
-
-                            <button class="mock-forger-btn" id="mock-forger-btn-text">Forjar Planilha</button>
+ 
+                            <button class="mock-forger-btn" id="mock-forger-btn-text" style="padding: 8px; font-size: 8px; border-radius: 10px; margin-top: 2px;">Forjar Planilha</button>
                         </div>
                     </div>
-
+ 
                     <!-- TAB 5: Analytics Screen (EVOLUÇÃO) - ANALYTICS -->
                     <div id="mock-tab-analytics" class="mock-tab-content">
                         <div class="screen-header-bar">
@@ -1250,45 +1356,60 @@
                             <span style="font-weight: bold; font-size: 8px;">100%</span>
                         </div>
 
-                        <div class="mock-stats-grid">
-                            <div class="mock-stat-card">
-                                <div class="mock-stat-num">42</div>
-                                <div class="mock-stat-label" id="mock-label-workouts">Treinos</div>
+                        <!-- Metric Selector Toggle Bar -->
+                        <div style="display: flex; gap: 4px; background-color: #050505; padding: 2px; border-radius: 8px; border: 1px solid #151515; margin-bottom: 2px; width: 100%;">
+                            <div style="flex: 1; text-align: center; font-size: 7px; font-weight: 900; background-color: #FFF; color: #000; padding: 4px 0; border-radius: 6px;">VOL</div>
+                            <div style="flex: 1; text-align: center; font-size: 7px; font-weight: 900; color: #666; padding: 4px 0;">PESO</div>
+                            <div style="flex: 1; text-align: center; font-size: 7px; font-weight: 900; color: #666; padding: 4px 0;">REPS</div>
+                            <div style="flex: 1; text-align: center; font-size: 7px; font-weight: 900; color: #666; padding: 4px 0;">TEMPO</div>
+                        </div>
+ 
+                        <!-- Stats summary 2x2 grid -->
+                        <div class="mock-stats-grid" style="grid-template-columns: repeat(2, 1fr); gap: 6px; width: 100%;">
+                            <div class="mock-stat-card" style="padding: 6px 8px; border-radius: 10px;">
+                                <div class="mock-stat-num" style="font-size: 14px;">12</div>
+                                <div class="mock-stat-label" id="mock-label-workouts" style="font-size: 6px; margin-top: 1px;">Treinos</div>
                             </div>
-                            <div class="mock-stat-card">
-                                <div class="mock-stat-num">184t</div>
-                                <div class="mock-stat-label" id="mock-label-volume">Vol. Total</div>
+                            <div class="mock-stat-card" style="padding: 6px 8px; border-radius: 10px;">
+                                <div class="mock-stat-num" style="font-size: 14px; color: var(--accent-color);">42.5k kg</div>
+                                <div class="mock-stat-label" id="mock-label-volume" style="font-size: 6px; margin-top: 1px;">Vol. Total</div>
+                            </div>
+                            <div class="mock-stat-card" style="padding: 6px 8px; border-radius: 10px;">
+                                <div class="mock-stat-num" style="font-size: 14px; color: #FFF;">10.4 h</div>
+                                <div class="mock-stat-label" style="font-size: 6px; margin-top: 1px;">Tempo</div>
+                            </div>
+                            <div class="mock-stat-card" style="padding: 6px 8px; border-radius: 10px;">
+                                <div class="mock-stat-num" style="font-size: 14px; color: #FFF;">860</div>
+                                <div class="mock-stat-label" style="font-size: 6px; margin-top: 1px;">Reps</div>
                             </div>
                         </div>
-
+ 
                         <!-- Animated SVG volume chart -->
-                        <div class="mock-chart-card">
-                            <div class="mock-chart-title" id="mock-chart-header">Volume Semanal</div>
-                            <svg class="mock-chart-svg" viewBox="0 0 200 100">
-                                <line x1="20" y1="10" x2="190" y2="10" stroke="#111" stroke-width="0.5"></line>
-                                <line x1="20" y1="40" x2="190" y2="40" stroke="#111" stroke-width="0.5"></line>
-                                <line x1="20" y1="70" x2="190" y2="70" stroke="#111" stroke-width="0.5"></line>
-                                <line x1="20" y1="90" x2="190" y2="90" stroke="#222" stroke-width="1"></line>
-
-                                <rect x="35" y="45" width="14" height="45" fill="#222" rx="2"></rect>
-                                <rect x="65" y="30" width="14" height="60" fill="#222" rx="2"></rect>
-                                <rect x="95" y="40" width="14" height="50" fill="#222" rx="2"></rect>
-                                <rect x="125" y="20" width="14" height="70" fill="#222" rx="2"></rect>
-                                <rect x="155" y="15" width="14" height="75" fill="#90EE90" rx="2"></rect>
-
-                                <text x="42" y="98" fill="#444" font-size="6" text-anchor="middle">S19</text>
-                                <text x="72" y="98" fill="#444" font-size="6" text-anchor="middle">S20</text>
-                                <text x="102" y="98" fill="#444" font-size="6" text-anchor="middle">S21</text>
-                                <text x="132" y="98" fill="#444" font-size="6" text-anchor="middle">S22</text>
-                                <text x="162" y="98" fill="#90EE90" font-size="6" text-anchor="middle">S23</text>
+                        <div class="mock-chart-card" style="padding: 8px; border-radius: 12px; gap: 6px; width: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span class="mock-chart-title" id="mock-chart-header" style="font-size: 7.5px;">Volume Semanal</span>
+                                <span style="font-size: 6px; color: var(--accent-color); font-weight: bold; background-color: rgba(144,238,144,0.1); padding: 1px 4px; border-radius: 4px;">7 DIAS</span>
+                            </div>
+                            <svg class="mock-chart-svg" viewBox="0 0 200 80" style="height: 60px;">
+                                <line x1="10" y1="10" x2="190" y2="10" stroke="#151515" stroke-width="0.5"></line>
+                                <line x1="10" y1="30" x2="190" y2="30" stroke="#151515" stroke-width="0.5"></line>
+                                <line x1="10" y1="50" x2="190" y2="50" stroke="#151515" stroke-width="0.5"></line>
+                                <line x1="10" y1="70" x2="190" y2="70" stroke="#222" stroke-width="0.8"></line>
+ 
+                                <path d="M 15 55 Q 40 45, 65 35 T 115 45 T 140 25 T 180 15" fill="none" stroke="#90EE90" stroke-width="1.5"></path>
+                                <circle cx="15" cy="55" r="2.5" fill="#90EE90" stroke="#000" stroke-width="0.8"></circle>
+                                <circle cx="65" cy="35" r="2.5" fill="#90EE90" stroke="#000" stroke-width="0.8"></circle>
+                                <circle cx="115" cy="45" r="2.5" fill="#90EE90" stroke="#000" stroke-width="0.8"></circle>
+                                <circle cx="140" cy="25" r="2.5" fill="#90EE90" stroke="#000" stroke-width="0.8"></circle>
+                                <circle cx="180" cy="15" r="2.5" fill="#90EE90" stroke="#000" stroke-width="0.8"></circle>
+ 
+                                <text x="15" y="78" fill="#444" font-size="5" text-anchor="middle">S19</text>
+                                <text x="65" y="78" fill="#444" font-size="5" text-anchor="middle">S20</text>
+                                <text x="115" y="78" fill="#444" font-size="5" text-anchor="middle">S21</text>
+                                <text x="140" y="78" fill="#444" font-size="5" text-anchor="middle">S22</text>
+                                <text x="180" y="78" fill="#90EE90" font-size="5" text-anchor="middle">S23</text>
                             </svg>
                         </div>
-                    </div>
-
-                    <!-- Static Mock Bottom Navigation Bar -->
-                    <div class="mock-bottom-nav">
-                        <button id="mock-nav-splits" class="mock-nav-item active">🔱</button>
-                        <button id="mock-nav-analytics" class="mock-nav-item">📈</button>
                     </div>
 
                 </div>
@@ -1453,18 +1574,6 @@
             });
             // Show target tab
             document.getElementById(`mock-tab-${tabId}`).classList.add('active');
-            
-            // Update nav buttons active style
-            document.querySelectorAll('.mock-nav-item').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Map the highlighted icon on the tab bar
-            if (tabId === 'analytics') {
-                document.getElementById('mock-nav-analytics').classList.add('active');
-            } else {
-                document.getElementById('mock-nav-splits').classList.add('active');
-            }
         }
 
         // Autoscroll logic (3 seconds)
