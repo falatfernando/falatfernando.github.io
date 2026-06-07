@@ -719,6 +719,13 @@
     <h2 data-lang="projects-title">Projetos</h2>
     <div class="section-content">
     <div class="projects-list">
+    <a href="pantheon/index.html" class="project-item" target="_blank" rel="noopener noreferrer">
+    <img src="pantheon/bw_icon.svg" alt="PANTHEON">
+    <div class="project-info">
+    <div class="project-title">PANTHEON</div>
+    <div class="project-desc" data-lang="project-pantheon">Aplicativo de treino premium, 100% offline e livre de distrações, anúncios ou paywalls.</div>
+    </div>
+    </a>
     <a href="https://tbdashboard.onrender.com/" class="project-item" target="_blank" rel="noopener noreferrer">
     <img src="images/bacteria.png" alt="TBDashboard">
     <div class="project-info">
@@ -840,6 +847,7 @@
     'project-dashboards': 'Transformando dados complexos em insights através de visualizações interativas com Power BI, Streamlit e Dash Plotly, com forte atuação em pipelines e arquitetura AWS.',
     'project-automation-title': 'Automações',
     'project-automation-desc': 'Automações de rotinas repetitivas e webscraping!',
+    'project-pantheon': 'Aplicativo de treino premium, 100% offline e livre de distrações, anúncios ou paywalls.',
     'video-title': 'Showcase de Dashboards, Arquitetura e Pipelines',
     'video-1-title': 'Industry PowerBI Dashboard',
     'video-1-desc': 'Visão geral da arquitetura, fluxo de dados e componentes principais da solução.',
@@ -873,6 +881,7 @@
     'project-dashboards': 'Transforming complex data into insights through interactive visualizations using Power BI, Streamlit, and Dash Plotly, with strong focus on AWS pipelines and architecture.',
     'project-automation-title': 'Automations',
     'project-automation-desc': 'Automation of repetitive routines and webscraping!',
+    'project-pantheon': 'Premium workout application, 100% offline and distraction-free, with no ads or paywalls.',
     'video-title': 'Dashboard, Architecture and Pipeline Showcase',
     'video-1-title': 'Industry PowerBI Dashboard',
     'video-1-desc': 'Overview of the architecture, data flow, and core components of the solution.',
@@ -881,7 +890,25 @@
     }
     };
     
-    let currentLang = 'pt-br';
+    // Retrieve and initialize language
+    const storedLang = localStorage.getItem('user-lang');
+    let defaultLang = 'pt-br';
+    if (storedLang) {
+        if (storedLang.startsWith('pt')) {
+            defaultLang = 'pt-br';
+        } else if (storedLang.startsWith('en')) {
+            defaultLang = 'en-us';
+        }
+    } else {
+        const userLang = navigator.language || navigator.userLanguage;
+        if (!userLang.startsWith("pt")) {
+            defaultLang = 'en-us';
+        } else {
+            defaultLang = 'pt-br';
+        }
+    }
+
+    let currentLang = defaultLang;
     const btnPT = document.getElementById('btn-pt');
     const btnEN = document.getElementById('btn-en');
     
@@ -907,6 +934,7 @@
     btnPT.addEventListener('click', () => {
     if (currentLang !== 'pt-br') {
     currentLang = 'pt-br';
+    localStorage.setItem('user-lang', currentLang);
     updateLanguage(currentLang);
     }
     });
@@ -914,11 +942,12 @@
     btnEN.addEventListener('click', () => {
     if (currentLang !== 'en-us') {
     currentLang = 'en-us';
+    localStorage.setItem('user-lang', currentLang);
     updateLanguage(currentLang);
     }
     });
 
-    updateLanguage('pt-br');
+    updateLanguage(currentLang);
     
     function showModal(type) {
     const modal = document.getElementById("popup-modal");

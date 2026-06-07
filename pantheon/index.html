@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANTHEON - Forged with Intent</title>
+    <!-- Favicon & Touch Icon -->
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --card-color: #0A0A0A;
+            --border-color: #1A1A1A;
+            --accent-color: #90EE90;
+            --text-color: #FFFFFF;
+            --text-secondary: #666666;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        /* Ambient background glow */
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(144, 238, 144, 0.02) 0%, rgba(0,0,0,0) 70%);
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        /* Header Layout */
+        .nav-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .logo-symbol {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-text-main {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #FFFFFF;
+        }
+
+        .logo-text-sub {
+            font-family: 'Outfit', sans-serif;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            border-left: 1px solid var(--border-color);
+            padding-left: 10px;
+            text-transform: uppercase;
+        }
+
+        .logo-image {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            object-fit: contain;
+        }
+
+        /* Language Toggle styling */
+        .lang-toggle {
+            display: flex;
+            background-color: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2px;
+        }
+
+        .lang-toggle button {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 18px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .lang-toggle button.active {
+            background-color: var(--text-color);
+            color: #000;
+        }
+
+        /* Main Hero Section Split */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            width: 100%;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-content {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tagline {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 44px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.15;
+        }
+
+        .description {
+            font-size: 15px;
+            color: #888;
+            line-height: 1.6;
+            max-width: 480px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 28px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all var(--transition-speed), transform 0.1s;
+        }
+
+        .btn-primary {
+            background-color: var(--text-color);
+            color: #000;
+            border: 1px solid var(--text-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #EAEAEA;
+            border-color: #EAEAEA;
+        }
+
+        .btn-secondary {
+            background-color: #0A0A0A;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #111;
+            border-color: #333;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        /* High Fidelity Phone Mockup */
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background-color: #000;
+            border: 10px solid #1A1A1A;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px #333;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-notch {
+            width: 120px;
+            height: 18px;
+            background-color: #1A1A1A;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        /* Screen & Tabs */
+        .phone-screen {
+            padding: 30px 16px 48px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            height: 100%;
+        }
+
+        .mock-tab-content {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+            overflow-y: auto;
+            height: 100%;
+            animation: tabFadeIn 0.3s ease;
+        }
+
+        .mock-tab-content.active {
+            display: flex;
+        }
+
+        /* Hide scrollbars inside simulated phone */
+        .mock-tab-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* High Fidelity Home Screen layout */
+        .mock-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+
+        .mock-logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 1.5px solid #1A1A1A;
+            object-fit: contain;
+        }
+
+        .mock-logo-txt {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            color: #FFF;
+        }
+
+        /* Simulated Calendar Widget */
+        .mock-calendar-widget {
+            border: 1px solid #1A1A1A;
+            border-radius: 14px;
+            padding: 10px;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .mock-cal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8px;
+            font-weight: bold;
+            color: #FFF;
+            padding: 0 4px;
+        }
+
+        .mock-cal-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            font-size: 7px;
+            color: #555;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        .mock-cal-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+            font-size: 8px;
+            font-weight: bold;
+        }
+
+        .mock-cal-days span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            color: #FFF;
+        }
+
+        .mock-cal-days span.completed {
+            background-color: var(--accent-color);
+            color: #000;
+        }
+
+        .mock-cal-days span.empty {
+            visibility: hidden;
+        }
+
+        /* Home page buttons layout */
+        .mock-home-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .mock-home-btn-main {
+            background-color: #FFFFFF;
+            color: #000000;
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .mock-home-btn-main-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .mock-home-btn-main-title {
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        .mock-home-btn-main-sub {
+            font-size: 7.5px;
+            color: #666;
+            margin-top: 1px;
+        }
+
+        .mock-home-btn-sec {
+            background-color: #0A0A0A;
+            border: 1px solid #1A1A1A;
+            color: #FFFFFF;
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mock-home-btn-sec-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .mock-home-btn-manage {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 9px;
+            color: #888;
+            background: none;
+            border: none;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        /* Mock Splits List */
+        .mock-split-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mock-split-card {
+            background-color: #0A0A0A;
+            border: 1px solid #1A1A1A;
+            border-radius: 16px;
+            padding: 16px;
+            text-align: left;
+        }
+
+        .mock-split-name {
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            color: var(--text-color);
+        }
+
+        .mock-split-sub {
+            font-size: 9px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            font-weight: bold;
+        }
+
+        .mock-split-card-dashed {
+            border: 1px dashed var(--border-color);
+            background: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+            border-radius: 16px;
+            font-size: 10px;
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        /* Active Workout Screen Layout */
+        .screen-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #111;
+            padding-bottom: 8px;
+            margin-bottom: 5px;
+        }
+
+        .screen-header-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .mock-timer {
+            background-color: #0A0A0A;
+            border: 1px solid #151515;
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mock-timer-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: var(--text-secondary);
+            font-weight: bold;
+        }
+
+        .mock-timer-val {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--accent-color);
+            font-family: monospace;
+        }
+
+        .mock-timer-bar {
+            height: 2px;
+            background-color: #1A1A1A;
+            border-radius: 1px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mock-timer-progress {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 60%;
+            animation: mockProgress 8s infinite linear;
+        }
+
+        .mock-exercise-card {
+            background-color: #0A0A0A;
+            border: 1px solid #1A1A1A;
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mock-superset-tag {
+            font-size: 8px;
+            font-weight: 900;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .mock-exercise-name {
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .mock-set-row {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr 1.2fr 1fr;
+            align-items: center;
+            font-size: 9px;
+            padding: 6px 0;
+            border-top: 1px solid #151515;
+            color: var(--text-secondary);
+        }
+
+        .mock-set-row.active {
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        .mock-input {
+            width: 40px;
+            background-color: #000;
+            border: 1px solid #1A1A1A;
+            border-radius: 4px;
+            text-align: center;
+            color: var(--text-color);
+            padding: 2px 0;
+            font-size: 9px;
+        }
+
+        .mock-check {
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-speed);
+        }
+
+        .mock-check.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .mock-check svg {
+            width: 10px;
+            height: 10px;
+            stroke: #000;
+            stroke-width: 3;
+            display: none;
+        }
+
+        .mock-check.active svg {
+            display: block;
+        }
+
+        .mock-hud {
+            margin-top: auto;
+            background-color: #050505;
+            border: 1px solid #1A1A1A;
+            border-radius: 14px;
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Mock Select Plan tab */
+        .mock-plan-option-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .mock-plan-option-card {
+            background-color: #0A0A0A;
+            border: 1px solid #1A1A1A;
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border-color var(--transition-speed);
+        }
+
+        .mock-plan-option-card.active {
+            border-color: var(--accent-color);
+        }
+
+        .mock-plan-option-card .plan-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .mock-plan-option-card .plan-info h4 {
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .mock-plan-option-card .plan-info span {
+            font-size: 8px;
+            color: var(--text-secondary);
+            font-weight: bold;
+        }
+
+        .mock-plan-badge {
+            background-color: #111;
+            border: 1px solid #222;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 7px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+
+        .mock-plan-option-card.active .mock-plan-badge {
+            background-color: rgba(144, 238, 144, 0.1);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Mock Plan Forger Tab */
+        .mock-forger-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .mock-input-label {
+            font-size: 8px;
+            font-weight: 900;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .mock-text-input {
+            width: 100%;
+            background-color: #050505;
+            border: 1px solid #1A1A1A;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 10px;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        .mock-forger-exercise-item {
+            background-color: #0A0A0A;
+            border: 1px solid #1A1A1A;
+            border-radius: 12px;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .mock-forger-ex-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mock-forger-ex-name {
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .mock-forger-link-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 7.5px;
+            font-weight: 900;
+            color: var(--accent-color);
+            letter-spacing: 0.5px;
+            margin: 2px 0 2px 10px;
+            border-left: 1px dashed var(--border-color);
+            padding-left: 8px;
+        }
+
+        .mock-forger-btn {
+            background-color: var(--text-color);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        /* Mock Analytics */
+        .mock-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .mock-stat-card {
+            background-color: #0A0A0A;
+            border: 1px solid #1A1A1A;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .mock-stat-num {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--accent-color);
+        }
+
+        .mock-stat-label {
+            font-size: 8px;
+            color: var(--text-secondary);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .mock-chart-card {
+            background-color: #0A0A0A;
+            border: 1px solid #1A1A1A;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .mock-chart-title {
+            font-size: 9px;
+            font-weight: bold;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        .mock-chart-svg {
+            width: 100%;
+            height: 100px;
+        }
+
+        /* Bottom Tab Bar */
+        .mock-bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 48px;
+            background-color: #050505;
+            border-top: 1px solid #1A1A1A;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .mock-nav-item {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            width: 33.33%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color var(--transition-speed);
+        }
+
+        .mock-nav-item.active {
+            color: var(--accent-color);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: left;
+            transition: border-color var(--transition-speed);
+        }
+
+        .feature-card:hover {
+            border-color: #333;
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .feature-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .footer {
+            width: 100%;
+            border-top: 1px solid var(--border-color);
+            padding: 30px 0;
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        .footer-links a:hover {
+            color: var(--text-color);
+        }
+
+        /* Responsive Layouts */
+        @media(max-width: 768px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            .hero-content {
+                align-items: center;
+                text-align: center;
+            }
+            .description {
+                margin: 0 auto;
+            }
+            h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow"></div>
+    
+    <div class="container">
+        <!-- Navigation Header -->
+        <header class="nav-header">
+            <a href="#" class="logo-symbol">
+                <img src="bw_icon.svg" alt="Pantheon Logo" class="logo-image">
+                <span class="logo-text-main">PANTHEON</span>
+                <span class="logo-text-sub">WORKOUT APP</span>
+            </a>
+            <!-- Language Switcher -->
+            <div class="lang-toggle">
+                <button id="lang-btn-pt" class="active" onclick="setLanguage('pt')">PT</button>
+                <button id="lang-btn-en" onclick="setLanguage('en')">EN</button>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <span class="tagline" id="hero-tagline">SEM ANÚNCIOS. SEM PAYWALLS. APENAS INTENÇÃO.</span>
+                <h1 id="hero-title">Feito para o treino, não para os anúncios</h1>
+                <p class="description" id="hero-desc">
+                    O Pantheon foi construído por um cara de academia cansado de aplicativos que bloqueiam sua evolução com paywalls, enchem sua tela de anúncios e vendem seus dados. Este é um templo de treino premium, 100% offline e livre de distrações. Estética P&B limpa, registro local veloz e zero assinaturas.
+                </p>
+                
+                <div class="cta-buttons">
+                    <a href="https://github.com/falatfernando/pantheon/releases" class="btn btn-primary" id="btn-download">
+                        Baixar APK (Beta 1.4)
+                    </a>
+                    <a href="tribute.html" class="btn btn-secondary" id="btn-tribute">
+                        Oferecer Tributo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Simulated High Fidelity Phone Mockup - Static Showcase -->
+            <div class="phone-mockup">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    
+                    <!-- TAB 0: Main Screen (HOME SCREEN) -->
+                    <div id="mock-tab-home" class="mock-tab-content active">
+                        <!-- Header utility bar -->
+                        <div class="screen-header-bar" style="border: none; margin-bottom: 0;">
+                            <!-- Analytics icon -->
+                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                            <span style="font-weight: bold; font-size: 8px;">100%</span>
+                        </div>
+
+                        <!-- Brand Logo inside Mock -->
+                        <div class="mock-logo-container">
+                            <img src="bw_icon.svg" alt="Pantheon Logo" class="mock-logo-img">
+                            <span class="mock-logo-txt">PANTHEON</span>
+                        </div>
+
+                        <!-- Training Calendar Widget -->
+                        <div class="mock-calendar-widget">
+                            <div class="mock-cal-header">
+                                <span>‹</span>
+                                <span id="mock-cal-month">JUNHO 2026</span>
+                                <span>›</span>
+                            </div>
+                            <div class="mock-cal-weekdays">
+                                <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                            </div>
+                            <div class="mock-cal-days">
+                                <span class="empty"></span><span class="empty"></span><span>1</span><span class="completed">2</span><span>3</span><span class="completed">4</span><span class="completed">5</span>
+                                <span>6</span><span>7</span><span class="completed">8</span><span>9</span><span class="completed">10</span><span class="completed">11</span><span>12</span>
+                                <span class="completed">13</span><span>14</span><span class="completed">15</span><span>16</span><span class="completed">17</span><span>18</span><span>19</span>
+                                <span class="completed">20</span><span>21</span><span class="completed">22</span><span>23</span><span class="completed">24</span><span>25</span><span>26</span>
+                                <span>27</span><span>28</span><span>29</span><span>30</span><span class="empty"></span><span class="empty"></span><span class="empty"></span>
+                            </div>
+                        </div>
+
+                        <!-- Buttons actions list -->
+                        <div class="mock-home-buttons">
+                            <div class="mock-home-btn-main">
+                                <div class="mock-home-btn-main-info">
+                                    <!-- Minimalistic Dumbbell SVG icon -->
+                                    <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #000;">
+                                      <path d="m6.5 6.5 11 11"/>
+                                      <path d="m21 21-1-1"/>
+                                      <path d="m3 3 1 1"/>
+                                      <path d="m18 22 4-4"/>
+                                      <path d="m2 6 4-4"/>
+                                      <path d="m3 10 7-7"/>
+                                      <path d="m14 21 7-7"/>
+                                      <path d="M6.5 12.5 12.5 6.5"/>
+                                      <path d="m11.5 17.5 6-6"/>
+                                    </svg>
+                                    <div>
+                                        <div class="mock-home-btn-main-title" id="mock-home-start-text">INICIAR TREINO</div>
+                                        <div class="mock-home-btn-main-sub">A: EMPURRAR</div>
+                                    </div>
+                                </div>
+                                <span style="font-size: 9px;">▶</span>
+                            </div>
+
+                            <div class="mock-home-btn-sec">
+                                <div class="mock-home-btn-sec-content">
+                                    <!-- List SVG icon -->
+                                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #FFF;">
+                                      <line x1="8" y1="6" x2="21" y2="6"></line>
+                                      <line x1="8" y1="12" x2="21" y2="12"></line>
+                                      <line x1="8" y1="18" x2="21" y2="18"></line>
+                                      <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                      <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                      <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                    </svg>
+                                    <span id="mock-home-split-label">Divisão de Treino</span>
+                                </div>
+                                <span style="font-size: 8px; color: #444;">❯</span>
+                            </div>
+
+                            <button class="mock-home-btn-manage" id="mock-home-manage-text">
+                                <!-- ClipboardList SVG icon -->
+                                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #888; margin-right: 6px; display: inline-block; vertical-align: middle;">
+                                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                  <path d="M9 14h6"></path>
+                                  <path d="M9 18h6"></path>
+                                  <path d="M10 10h4"></path>
+                                </svg>
+                                <span>Gerenciar Planilhas</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- TAB 1: Splits list (TEMPLO) - SPLITS SCREEN -->
+                    <div id="mock-tab-splits" class="mock-tab-content">
+                        <div class="screen-header-bar">
+                            <span class="screen-header-title">🔱 TEMPLO</span>
+                            <span style="font-weight: bold; font-size: 8px;">100%</span>
+                        </div>
+                        
+                        <div class="mock-split-list">
+                            <div class="mock-split-card">
+                                <div class="mock-split-name">A: EMPURRAR (PUSH)</div>
+                                <div class="mock-split-sub" id="mock-split-sub-a">4 Exercícios • Supino, Militar...</div>
+                            </div>
+                            
+                            <div class="mock-split-card">
+                                <div class="mock-split-name">B: PUXAR (PULL)</div>
+                                <div class="mock-split-sub" id="mock-split-sub-b">4 Exercícios • Terra, Remada...</div>
+                            </div>
+
+                            <div class="mock-split-card">
+                                <div class="mock-split-name">C: PERNAS (LEGS)</div>
+                                <div class="mock-split-sub" id="mock-split-sub-c">5 Exercícios • Agachamento, Leg...</div>
+                            </div>
+
+                            <div class="mock-split-card-dashed" id="mock-add-split">
+                                + CRIAR PLANILHA
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: Active Workout Screen (FORJA) - ACTIVE WORKOUT -->
+                    <div id="mock-tab-workout" class="mock-tab-content">
+                        <div class="screen-header-bar">
+                            <span class="screen-header-title" id="mock-workout-header">FORJA • EMPURRAR</span>
+                            <span style="font-weight: bold; font-size: 8px; color: var(--accent-color);">● ATIVO</span>
+                        </div>
+
+                        <!-- Rest Timer countdown simulation -->
+                        <div class="mock-timer">
+                            <div class="mock-timer-top">
+                                <span id="mock-rest-title">TEMPO DE DESCANSO</span>
+                                <span>01:12 / 02:00</span>
+                            </div>
+                            <div class="mock-timer-val">00:48</div>
+                            <div class="mock-timer-bar">
+                                <div class="mock-timer-progress"></div>
+                            </div>
+                        </div>
+
+                        <!-- Active Superset Exercise card -->
+                        <div class="mock-exercise-card">
+                            <div class="mock-superset-tag">
+                                🔄 <span id="mock-superset-label">Supersérie Ativa</span>
+                            </div>
+                            <div class="mock-exercise-name">Supino Reto</div>
+                            
+                            <div class="mock-set-row">
+                                <span>SÉRIE</span>
+                                <span style="text-align: center;">KG</span>
+                                <span style="text-align: center;">REPS</span>
+                                <span style="display: flex; justify-content: flex-end;">OK</span>
+                            </div>
+                            <div class="mock-set-row">
+                                <span>1</span>
+                                <span style="text-align: center;">80</span>
+                                <span style="text-align: center;">10</span>
+                                <span style="display: flex; justify-content: flex-end;">
+                                    <div class="mock-check active">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="mock-set-row active">
+                                <span>2</span>
+                                <span style="display: flex; justify-content: center;"><input class="mock-input" value="82" readonly></span>
+                                <span style="display: flex; justify-content: center;"><input class="mock-input" value="8" readonly></span>
+                                <span style="display: flex; justify-content: flex-end;">
+                                    <div class="mock-check">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Swipe swap HUD -->
+                        <div class="mock-hud">
+                            <div style="display: flex; flex-direction: column; gap: 2px; text-align: left;">
+                                <span class="mock-hud-next" id="mock-hud-next-label">Próximo exercício</span>
+                                <span style="font-weight: bold; font-size: 10px;" id="mock-hud-next-name">Remada Curvada</span>
+                            </div>
+                            <span style="font-size: 16px;">⇄</span>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: Select Plan Screen (SELECIONAR PLANILHA) -->
+                    <div id="mock-tab-select-plan" class="mock-tab-content">
+                        <div class="screen-header-bar">
+                            <span class="screen-header-title" id="mock-select-plan-header">PLANILHAS</span>
+                            <span style="font-weight: bold; font-size: 8px;">100%</span>
+                        </div>
+
+                        <div class="mock-plan-option-list">
+                            <div class="mock-plan-option-card active">
+                                <div class="plan-info">
+                                    <h4>🔱 PANTHEON ALPHA</h4>
+                                    <span id="mock-badge-active-desc">ABC • Ativo</span>
+                                </div>
+                                <div class="mock-plan-badge" id="mock-badge-active">ATIVO</div>
+                            </div>
+                            
+                            <div class="mock-plan-option-card">
+                                <div class="plan-info">
+                                    <h4 id="mock-arnold-title">🦁 ARNOLD SPLIT</h4>
+                                    <span>Seg-Sáb • Backup</span>
+                                </div>
+                                <div class="mock-plan-badge" id="mock-badge-select">SELECIONAR</div>
+                            </div>
+
+                            <div class="mock-plan-option-card">
+                                <div class="plan-info">
+                                    <h4 id="mock-bro-title">💪 BRO SPLIT</h4>
+                                    <span>Seg-Sex • Backup</span>
+                                </div>
+                                <div class="mock-plan-badge" id="mock-badge-select-2">SELECIONAR</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 4: Plan Forger Screen (FORJADOR DE TREINO) -->
+                    <div id="mock-tab-forger" class="mock-tab-content">
+                        <div class="screen-header-bar">
+                            <span class="screen-header-title" id="mock-forger-header">FORJADOR</span>
+                            <span style="font-weight: bold; font-size: 8px;">100%</span>
+                        </div>
+
+                        <div class="mock-forger-container">
+                            <div>
+                                <div class="mock-input-label" id="mock-forger-label-name">Nome do Treino</div>
+                                <input class="mock-text-input" id="mock-forger-input-val" value="A: EMPURRAR" readonly>
+                            </div>
+
+                            <div class="mock-forger-exercise-item">
+                                <div class="mock-forger-ex-header">
+                                    <span class="mock-forger-ex-name" id="mock-forger-ex1">1. Supino Reto</span>
+                                    <span style="font-size: 7px; color: var(--text-secondary); font-weight: bold;">FORÇA</span>
+                                </div>
+                                <div class="mock-forger-link-toggle" id="mock-forger-toggle-link">
+                                    🔗 LINKAR COM PRÓXIMO
+                                </div>
+                                <div class="mock-forger-ex-header" style="margin-top: 4px; border-top: 1px solid #111; padding-top: 6px;">
+                                    <span class="mock-forger-ex-name" id="mock-forger-ex2">2. Desenvolvimento Militar</span>
+                                    <span style="font-size: 7px; color: var(--text-secondary); font-weight: bold;">FORÇA</span>
+                                </div>
+                            </div>
+
+                            <div class="mock-forger-exercise-item">
+                                <div class="mock-forger-ex-header">
+                                    <span class="mock-forger-ex-name" id="mock-forger-ex3">3. Elevação Lateral</span>
+                                    <span style="font-size: 7px; color: var(--text-secondary); font-weight: bold;">FORÇA</span>
+                                </div>
+                            </div>
+
+                            <button class="mock-forger-btn" id="mock-forger-btn-text">Forjar Planilha</button>
+                        </div>
+                    </div>
+
+                    <!-- TAB 5: Analytics Screen (EVOLUÇÃO) - ANALYTICS -->
+                    <div id="mock-tab-analytics" class="mock-tab-content">
+                        <div class="screen-header-bar">
+                            <span class="screen-header-title" id="mock-analytics-title">EVOLUÇÃO</span>
+                            <span style="font-weight: bold; font-size: 8px;">100%</span>
+                        </div>
+
+                        <div class="mock-stats-grid">
+                            <div class="mock-stat-card">
+                                <div class="mock-stat-num">42</div>
+                                <div class="mock-stat-label" id="mock-label-workouts">Treinos</div>
+                            </div>
+                            <div class="mock-stat-card">
+                                <div class="mock-stat-num">184t</div>
+                                <div class="mock-stat-label" id="mock-label-volume">Vol. Total</div>
+                            </div>
+                        </div>
+
+                        <!-- Animated SVG volume chart -->
+                        <div class="mock-chart-card">
+                            <div class="mock-chart-title" id="mock-chart-header">Volume Semanal</div>
+                            <svg class="mock-chart-svg" viewBox="0 0 200 100">
+                                <line x1="20" y1="10" x2="190" y2="10" stroke="#111" stroke-width="0.5"></line>
+                                <line x1="20" y1="40" x2="190" y2="40" stroke="#111" stroke-width="0.5"></line>
+                                <line x1="20" y1="70" x2="190" y2="70" stroke="#111" stroke-width="0.5"></line>
+                                <line x1="20" y1="90" x2="190" y2="90" stroke="#222" stroke-width="1"></line>
+
+                                <rect x="35" y="45" width="14" height="45" fill="#222" rx="2"></rect>
+                                <rect x="65" y="30" width="14" height="60" fill="#222" rx="2"></rect>
+                                <rect x="95" y="40" width="14" height="50" fill="#222" rx="2"></rect>
+                                <rect x="125" y="20" width="14" height="70" fill="#222" rx="2"></rect>
+                                <rect x="155" y="15" width="14" height="75" fill="#90EE90" rx="2"></rect>
+
+                                <text x="42" y="98" fill="#444" font-size="6" text-anchor="middle">S19</text>
+                                <text x="72" y="98" fill="#444" font-size="6" text-anchor="middle">S20</text>
+                                <text x="102" y="98" fill="#444" font-size="6" text-anchor="middle">S21</text>
+                                <text x="132" y="98" fill="#444" font-size="6" text-anchor="middle">S22</text>
+                                <text x="162" y="98" fill="#90EE90" font-size="6" text-anchor="middle">S23</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Static Mock Bottom Navigation Bar -->
+                    <div class="mock-bottom-nav">
+                        <button id="mock-nav-splits" class="mock-nav-item active">🔱</button>
+                        <button id="mock-nav-analytics" class="mock-nav-item">📈</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="features-grid">
+            <!-- Offline first -->
+            <div class="feature-card">
+                <span class="feature-icon">💾</span>
+                <h3 class="feature-title" id="feat-title-1">Local-First & Offline</h3>
+                <p class="feature-desc" id="feat-desc-1">
+                    Seus dados são seus, como deve ser.
+                </p>
+            </div>
+
+            <!-- Alternating Supersets -->
+            <div class="feature-card">
+                <span class="feature-icon">🔄</span>
+                <h3 class="feature-title" id="feat-title-2">Superséries Alternadas</h3>
+                <p class="feature-desc" id="feat-desc-2">
+                    Vincule exercícios para alternar séries dinamicamente. Mantenha o foco no treino, não em clicar na tela.
+                </p>
+            </div>
+
+            <!-- Advanced Analytics -->
+            <div class="feature-card">
+                <span class="feature-icon">📈</span>
+                <h3 class="feature-title" id="feat-title-3">Análise Avançada e Gráficos</h3>
+                <p class="feature-desc" id="feat-desc-3">
+                    Acompanhe sua evolução com gráficos locais premium e detalhados, sem nenhuma assinatura ou limite.
+                </p>
+            </div>
+
+            <!-- Unlimited splits -->
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <h3 class="feature-title" id="feat-title-4">Planilhas e Divisões Ilimitadas</h3>
+                <p class="feature-desc" id="feat-desc-4">
+                    Crie quantas planilhas e divisões de treino você quiser.
+                </p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>© 2026 PANTHEON • FORGED WITH INTENT</div>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/pantheon.workout" target="_blank">Instagram</a>
+                <a href="https://github.com/falatfernando/pantheon" target="_blank">GitHub</a>
+                <a href="tribute.html" id="footer-tribute-link">Tributos</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const translations = {
+            pt: {
+                heroTagline: "SEM ANÚNCIOS. SEM PAYWALLS. APENAS INTENÇÃO.",
+                heroTitle: "Feito para o treino, não para os anúncios",
+                heroDesc: "O Pantheon foi construído por um cara de academia cansado de aplicativos que bloqueiam sua evolução com paywalls, enchem sua tela de anúncios e vendem seus dados. Este é um templo de treino premium, 100% offline e livre de distrações. Estética P&B limpa, registro local veloz e zero assinaturas.",
+                btnDownload: "Baixar APK (Beta 1.4)",
+                btnTribute: "Oferecer Tributo",
+                mockHeaderTitle: "FORJA • EMPURRAR",
+                mockRestTitle: "TEMPO DE DESCANSO",
+                mockSupersetLabel: "Supersérie Ativa",
+                mockHudNextLabel: "Próximo exercício",
+                featTitle1: "Local-First & Offline",
+                featDesc1: "Seus dados são seus, como deve ser.",
+                featTitle2: "Superséries Alternadas",
+                featDesc2: "Vincule exercícios para alternar séries dinamicamente. Mantenha o foco no treino, não em clicar na tela.",
+                featTitle3: "Análise Avançada e Gráficos",
+                featDesc3: "Acompanhe sua evolução com gráficos locais premium e detalhados, sem nenhuma assinatura ou limite.",
+                featTitle4: "Planilhas e Divisões Ilimitadas",
+                featDesc4: "Crie quantas planilhas e divisões de treino você quiser.",
+                footerTribute: "Tributos",
+                mockSplitA: "4 Exercícios • Supino, Militar...",
+                mockSplitB: "4 Exercícios • Terra, Remada...",
+                mockSplitC: "5 Exercícios • Agachamento, Leg...",
+                mockCreate: "+ CRIAR PLANILHA",
+                mockLabelWorkouts: "Treinos",
+                mockLabelVolume: "Vol. Total",
+                mockChartTitle: "Volume Semanal",
+                mockSelectPlanTitle: "PLANILHAS",
+                mockBadgeActive: "ATIVO",
+                mockBadgeActiveDesc: "ABC • Ativo",
+                mockBadgeSelect: "SELECIONAR",
+                mockBadgeSelect2: "SELECIONAR",
+                mockArnoldTitle: "🦁 ARNOLD SPLIT",
+                mockBroTitle: "💪 BRO SPLIT",
+                mockForgerTitle: "FORJADOR",
+                mockForgerLabelName: "Nome do Treino",
+                mockForgerExName1: "1. Supino Reto",
+                mockForgerExName2: "2. Desenvolvimento Militar",
+                mockForgerExName3: "3. Elevação Lateral",
+                mockForgerLinkToggle: "🔗 LINKAR COM PRÓXIMO",
+                mockForgerBtnText: "Forjar Planilha",
+                mockForgerInputVal: "A: EMPURRAR",
+                mockCalMonth: "JUNHO 2026",
+                mockHomeStart: "INICIAR TREINO",
+                mockHomeSplitLabel: "Divisão de Treino",
+                mockHomeManage: "Gerenciar Planilhas"
+            },
+            en: {
+                heroTagline: "NO ADS. NO PAYWALLS. JUST INTENT.",
+                heroTitle: "Built for the lift, not for the ads",
+                heroDesc: "Pantheon was built by a gym guy fed up with apps that block your progress with paywalls, spam you with ads, and sell your data. This is a premium, 100% offline, distraction-free temple for your training. Clean B&W aesthetics, fast local tracking, and zero subscriptions.",
+                btnDownload: "Download APK (Beta 1.4)",
+                btnTribute: "Offer a Tribute",
+                mockHeaderTitle: "FORGE • PUSH",
+                mockRestTitle: "REST TIME",
+                mockSupersetLabel: "Active Superset",
+                mockHudNextLabel: "Next exercise",
+                featTitle1: "Local-First & Offline",
+                featDesc1: "Your data is yours, as it should be.",
+                featTitle2: "Alternating Supersets",
+                featDesc2: "Link exercises to swap sets dynamically. Keep your focus on the lift, not clicking the screen.",
+                featTitle3: "Advanced Analytics & Plots",
+                featDesc3: "Track your progress with beautiful, high-fidelity local charts without a subscription or limits.",
+                featTitle4: "Unlimited Plans & Splits",
+                featDesc4: "Create as many plans and splits as you want.",
+                footerTribute: "Tributes",
+                mockSplitA: "4 Exercises • Bench, Press...",
+                mockSplitB: "4 Exercises • Deadlift, Row...",
+                mockSplitC: "5 Exercises • Squat, Leg Press...",
+                mockCreate: "+ CREATE PLAN",
+                mockLabelWorkouts: "Workouts",
+                mockLabelVolume: "Total Vol.",
+                mockChartTitle: "Weekly Volume",
+                mockSelectPlanTitle: "PLANS",
+                mockBadgeActive: "ACTIVE",
+                mockBadgeActiveDesc: "ABC • Active",
+                mockBadgeSelect: "SELECT",
+                mockBadgeSelect2: "SELECT",
+                mockArnoldTitle: "🦁 ARNOLD SPLIT",
+                mockBroTitle: "💪 BRO SPLIT",
+                mockForgerTitle: "FORGER",
+                mockForgerLabelName: "Workout Name",
+                mockForgerExName1: "1. Bench Press",
+                mockForgerExName2: "2. Military Press",
+                mockForgerExName3: "3. Lateral Raise",
+                mockForgerLinkToggle: "🔗 LINK WITH NEXT",
+                mockForgerBtnText: "Forge Plan",
+                mockForgerInputVal: "A: PUSH",
+                mockCalMonth: "JUNE 2026",
+                mockHomeStart: "START WORKOUT",
+                mockHomeSplitLabel: "Workout Split",
+                mockHomeManage: "Manage Plans"
+            }
+        };
+
+        const slides = ['home', 'splits', 'workout', 'select-plan', 'forger', 'analytics'];
+        let currentSlideIndex = 0;
+        let autoscrollInterval = null;
+
+        // Swapping Tab Logic (Visual showcase only, click handlers removed from markup)
+        function switchMockTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.mock-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Show target tab
+            document.getElementById(`mock-tab-${tabId}`).classList.add('active');
+            
+            // Update nav buttons active style
+            document.querySelectorAll('.mock-nav-item').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Map the highlighted icon on the tab bar
+            if (tabId === 'analytics') {
+                document.getElementById('mock-nav-analytics').classList.add('active');
+            } else {
+                document.getElementById('mock-nav-splits').classList.add('active');
+            }
+        }
+
+        // Autoscroll logic (3 seconds)
+        function startAutoscroll() {
+            if (autoscrollInterval) return;
+            autoscrollInterval = setInterval(() => {
+                currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                switchMockTab(slides[currentSlideIndex]);
+            }, 3000);
+        }
+
+        function setLanguage(lang) {
+            localStorage.setItem('user-lang', lang);
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+            
+            // Hero section updates
+            document.getElementById("hero-tagline").innerText = translations[lang].heroTagline;
+            document.getElementById("hero-title").innerText = translations[lang].heroTitle;
+            document.getElementById("hero-desc").innerText = translations[lang].heroDesc;
+            document.getElementById("btn-download").innerText = translations[lang].btnDownload;
+            document.getElementById("btn-tribute").innerText = translations[lang].btnTribute;
+            
+            // Mock Screen Home tab
+            document.getElementById("mock-cal-month").innerText = translations[lang].mockCalMonth;
+            document.getElementById("mock-home-start-text").innerText = translations[lang].mockHomeStart;
+            document.getElementById("mock-home-split-label").innerText = translations[lang].mockHomeSplitLabel;
+            document.getElementById("mock-home-manage-text").querySelector('span').innerText = translations[lang].mockHomeManage;
+
+            // Mock Screen splits tab
+            document.getElementById("mock-split-sub-a").innerText = translations[lang].mockSplitA;
+            document.getElementById("mock-split-sub-b").innerText = translations[lang].mockSplitB;
+            document.getElementById("mock-split-sub-c").innerText = translations[lang].mockSplitC;
+            document.getElementById("mock-add-split").innerText = translations[lang].mockCreate;
+            
+            // Mock Screen workout tab
+            document.getElementById("mock-workout-header").innerText = translations[lang].mockHeaderTitle;
+            document.getElementById("mock-rest-title").innerText = translations[lang].mockRestTitle;
+            document.getElementById("mock-superset-label").innerText = translations[lang].mockSupersetLabel;
+            document.getElementById("mock-hud-next-label").innerText = translations[lang].mockHudNextLabel;
+            
+            // Mock Screen select plan tab
+            document.getElementById("mock-select-plan-header").innerText = translations[lang].mockSelectPlanTitle;
+            document.getElementById("mock-arnold-title").innerText = translations[lang].mockArnoldTitle;
+            document.getElementById("mock-bro-title").innerText = translations[lang].mockBroTitle;
+            document.getElementById("mock-badge-active-desc").innerText = translations[lang].mockBadgeActiveDesc;
+            
+            const activeBadge = document.getElementById("mock-badge-active");
+            if (activeBadge.parentElement.classList.contains('active')) {
+                activeBadge.innerText = translations[lang].mockBadgeActive;
+            } else {
+                activeBadge.innerText = translations[lang].mockBadgeSelect;
+            }
+            
+            document.getElementById("mock-badge-select").innerText = translations[lang].mockBadgeSelect;
+            document.getElementById("mock-badge-select-2").innerText = translations[lang].mockBadgeSelect;
+
+            // Mock Screen forger tab
+            document.getElementById("mock-forger-header").innerText = translations[lang].mockForgerTitle;
+            document.getElementById("mock-forger-label-name").innerText = translations[lang].mockForgerLabelName;
+            document.getElementById("mock-forger-input-val").value = translations[lang].mockForgerInputVal;
+            document.getElementById("mock-forger-ex1").innerText = translations[lang].mockForgerExName1;
+            document.getElementById("mock-forger-ex2").innerText = translations[lang].mockForgerExName2;
+            document.getElementById("mock-forger-ex3").innerText = translations[lang].mockForgerExName3;
+            document.getElementById("mock-forger-toggle-link").innerText = translations[lang].mockForgerLinkToggle;
+            document.getElementById("mock-forger-btn-text").innerText = translations[lang].mockForgerBtnText;
+
+            // Mock Screen analytics tab
+            document.getElementById("mock-analytics-title").innerText = lang === 'pt' ? "EVOLUÇÃO" : "ANALYTICS";
+            document.getElementById("mock-label-workouts").innerText = translations[lang].mockLabelWorkouts;
+            document.getElementById("mock-label-volume").innerText = translations[lang].mockLabelVolume;
+            document.getElementById("mock-chart-header").innerText = translations[lang].mockChartTitle;
+            
+            // Features updates
+            document.getElementById("feat-title-1").innerText = translations[lang].featTitle1;
+            document.getElementById("feat-desc-1").innerText = translations[lang].featDesc1;
+            document.getElementById("feat-title-2").innerText = translations[lang].featTitle2;
+            document.getElementById("feat-desc-2").innerText = translations[lang].featDesc2;
+            document.getElementById("feat-title-3").innerText = translations[lang].featTitle3;
+            document.getElementById("feat-desc-3").innerText = translations[lang].featDesc3;
+            document.getElementById("feat-title-4").innerText = translations[lang].featTitle4;
+            document.getElementById("feat-desc-4").innerText = translations[lang].featDesc4;
+            
+            // Footer
+            document.getElementById("footer-tribute-link").innerText = translations[lang].footerTribute;
+
+            // Toggle active button style
+            document.getElementById("lang-btn-pt").classList.toggle("active", lang === 'pt');
+            document.getElementById("lang-btn-en").classList.toggle("active", lang === 'en');
+        }
+
+        // Initialize autoscroll
+        startAutoscroll();
+
+        // Retrieve and initialize language
+        const storedLang = localStorage.getItem('user-lang');
+        let initialLang = 'pt';
+        if (storedLang) {
+            if (storedLang.startsWith('pt')) {
+                initialLang = 'pt';
+            } else if (storedLang.startsWith('en')) {
+                initialLang = 'en';
+            }
+        } else {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (!userLang.startsWith("pt")) {
+                initialLang = 'en';
+            } else {
+                initialLang = 'pt';
+            }
+        }
+        setLanguage(initialLang);
+    </script>
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANTHEON - Offer a Tribute</title>
+    <!-- Favicon & Touch Icon -->
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --card-color: #0A0A0A;
+            --border-color: #1A1A1A;
+            --accent-color: #90EE90;
+            --text-color: #FFFFFF;
+            --text-secondary: #666666;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Ambient background glow */
+        .ambient-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(144, 238, 144, 0.03) 0%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            padding: 40px;
+            z-index: 1;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Language Toggle styling */
+        .lang-toggle {
+            display: flex;
+            background-color: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2px;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+        }
+
+        .lang-toggle button {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 18px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .lang-toggle button.active {
+            background-color: var(--text-color);
+            color: #000;
+        }
+
+        .header {
+            margin-bottom: 35px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-symbol {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            text-decoration: none;
+        }
+
+        .logo-text-main {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #FFFFFF;
+        }
+
+        .logo-text-sub {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            border-left: 1px solid var(--border-color);
+            padding-left: 12px;
+            text-transform: uppercase;
+        }
+
+        .logo-image {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border-color);
+            object-fit: contain;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: bold;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+
+        .section-divider {
+            height: 1px;
+            background-color: var(--border-color);
+            width: 100%;
+            margin: 30px 0;
+        }
+
+        /* Pix copy card layout */
+        .pix-card {
+            background-color: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .pix-title {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        .pix-key-container {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 16px;
+            cursor: pointer;
+            text-align: left;
+            transition: border-color var(--transition-speed), background-color var(--transition-speed);
+        }
+
+        .pix-key-container:hover {
+            border-color: #333;
+            background-color: #111;
+        }
+
+        .pix-key-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            font-weight: 900;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .copy-badge {
+            background-color: #111;
+            border: 1px solid #222;
+            color: var(--text-secondary);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 8px;
+            font-weight: bold;
+            transition: all var(--transition-speed);
+        }
+
+        .pix-key-container:hover .copy-badge {
+            color: var(--text-color);
+            border-color: #444;
+        }
+
+        .copy-badge.success {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #000;
+        }
+
+        .pix-key-value {
+            font-family: monospace;
+            font-size: 13px;
+            color: var(--text-color);
+            word-break: break-all;
+            line-height: 1.4;
+        }
+
+        .pix-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .step-num {
+            background-color: #111;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 900;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .step-text {
+            font-size: 11px;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        /* International section */
+        .international-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .btn-external {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            background-color: #111;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background-color var(--transition-speed), border-color var(--transition-speed), transform 0.1s;
+        }
+
+        .btn-external:hover {
+            background-color: #151515;
+            border-color: #333;
+        }
+
+        .btn-external:active {
+            transform: scale(0.98);
+        }
+
+        .btn-external svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 25px;
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        .btn-back:hover {
+            color: var(--text-color);
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 9px;
+            color: #444;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media(max-width: 480px) {
+            .container {
+                padding: 25px;
+                border-radius: 24px;
+            }
+            .lang-toggle {
+                top: 15px;
+                right: 15px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            .pix-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow"></div>
+    
+    <div class="container">
+        <!-- Language Switcher -->
+        <div class="lang-toggle">
+            <button id="lang-btn-pt" class="active" onclick="setLanguage('pt')">PT</button>
+            <button id="lang-btn-en" onclick="setLanguage('en')">EN</button>
+        </div>
+
+        <div class="header">
+            <a href="index.html" class="logo-symbol">
+                <img src="bw_icon.svg" alt="Pantheon Logo" class="logo-image">
+                <span class="logo-text-main">PANTHEON</span>
+                <span class="logo-text-sub">WORKOUT APP</span>
+            </a>
+            <h1 id="title-text">Apoie o Engenheiro</h1>
+            <p class="subtitle" id="sub-desc">
+                O Pantheon foi construído por um engenheiro e cara de academia cansado de aplicativos com paywalls bloqueando recursos básicos. Se o aplicativo ajudou na sua evolução, considere oferecer um tributo voluntário.
+            </p>
+        </div>
+
+        <!-- PIX CARD -->
+        <div class="pix-card">
+            <span class="pix-title" id="pix-title-text">Tributo via PIX</span>
+            
+            <div class="pix-key-container" onclick="copyKey()">
+                <div class="pix-key-header">
+                    <span id="pix-key-label">Chave Aleatória</span>
+                    <span class="copy-badge" id="copy-badge">COPIAR</span>
+                </div>
+                <div class="pix-key-value" id="pix-key-val">a7f3308c-12d5-46a1-be91-7498b93181fd</div>
+            </div>
+
+            <div class="pix-steps">
+                <div class="step-item">
+                    <span class="step-num">1</span>
+                    <span class="step-text" id="step-1-text">Toque no card acima para copiar a chave aleatória.</span>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">2</span>
+                    <span class="step-text" id="step-2-text">Abra o aplicativo de pagamentos do seu banco.</span>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">3</span>
+                    <span class="step-text" id="step-3-text">Selecione transferir via Pix, escolha chave aleatória e cole.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- INTERNATIONAL SUPPORT -->
+        <div class="international-container">
+            <span class="pix-title" id="int-title-text" style="margin-bottom: 5px;">Suporte Internacional</span>
+            
+            <a href="https://buymeacoffee.com/falat" target="_blank" class="btn-external">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20.216 17.141c-.281-.469-.908-.621-1.378-.34-.47.282-.622.908-.34 1.379.421.702.721 1.558.461 2.378-.44 1.39-1.921 2.05-3.321 2.05h-7.66c-1.4 0-2.88-.66-3.32-2.05-.261-.82-.04-1.676.38-2.378.282-.47.13-.102-.34-1.38-.47-.468-1.097-.318-1.378.151-.83 1.38-1.12 3.016-.44 4.545.92 2.07 3.32 3.484 5.61 3.484h7.66c2.29 0 4.69-1.414 5.61-3.484.68-1.529.39-3.165-.44-4.545zM22.84 5.568c-1.28-1.171-2.99-1.613-4.84-1.613h-1.66c-.6 0-1.16.299-1.52.809-.36-.51-.92-.809-1.52-.809h-10.66c-1.32 0-2.4 1.08-2.4 2.4v9.06c0 3.31 2.69 6 6 6h6c3.31 0 6-2.69 6-6v-1.2h1.66c1.85 0 3.56-.442 4.84-1.613 1.25-1.143 1.83-2.858 1.83-4.964s-.58-3.821-1.83-4.964zm-5.84 9.06c0 1.986-1.614 3.6-3.6 3.6h-6c-1.986 0-3.6-1.614-3.6-3.6v-6.66c0-.441.359-.8 0-.8h10.66c.441 0 .8.359.8.8v6.66zm4-3.036c0 2.213-1.787 4-4 4h-1.2v-8h1.2c2.213 0 4 1.787 4 4z"></path>
+                </svg>
+                Buy Me A Coffee
+            </a>
+
+            <a href="https://www.instagram.com/pantheon.workout" target="_blank" class="btn-external" style="background-color: #050505;">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051C.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                </svg>
+                Instagram
+            </a>
+        </div>
+
+        <!-- Back to landing page -->
+        <a href="index.html" class="btn-back">
+            ← <span id="back-text">Voltar ao Início</span>
+        </a>
+
+        <div class="footer-note">Pantheon • Forged with Intent</div>
+    </div>
+
+    <script>
+        const translations = {
+            pt: {
+                title: "Apoie o Engenheiro",
+                desc: "O Pantheon foi construído por um engenheiro e cara de academia cansado de aplicativos com paywalls bloqueando recursos básicos. Se o aplicativo ajudou na sua evolução, considere oferecer um tributo voluntário.",
+                pixTitle: "Tributo via PIX",
+                intTitle: "Suporte Internacional",
+                copyBtn: "COPIAR",
+                copiedBtn: "COPIADO!",
+                pixKeyLabel: "Chave Aleatória",
+                step1: "Toque no card acima para copiar a chave aleatória.",
+                step2: "Abra o aplicativo de pagamentos do seu banco.",
+                step3: "Selecione transferir via Pix, escolha chave aleatória e cole.",
+                backText: "Voltar ao Início"
+            },
+            en: {
+                title: "Support the Engineer",
+                desc: "Pantheon was built by an engineer and gym guy fed up with workout apps restricting basic features behind paywalls. If this app has aided your training progress, consider offering a voluntary tribute.",
+                pixTitle: "Tribute via PIX (Brazil)",
+                intTitle: "International Support",
+                copyBtn: "COPY",
+                copiedBtn: "COPIED!",
+                pixKeyLabel: "Random Key",
+                step1: "Tap the card above to copy the random key.",
+                step2: "Open your bank's mobile payment app.",
+                step3: "Select Pix transfer, choose random key (chave aleatória), and paste.",
+                backText: "Back to Home"
+            }
+        };
+
+        let currentLang = 'pt';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('user-lang', lang);
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+            
+            // Update UI elements
+            document.title = lang === 'pt' ? "PANTHEON - Oferecer Tributo" : "PANTHEON - Offer a Tribute";
+            document.getElementById("title-text").innerText = translations[lang].title;
+            document.getElementById("sub-desc").innerText = translations[lang].desc;
+            document.getElementById("pix-title-text").innerText = translations[lang].pixTitle;
+            document.getElementById("int-title-text").innerText = translations[lang].intTitle;
+            document.getElementById("pix-key-label").innerText = translations[lang].pixKeyLabel;
+            
+            const badge = document.getElementById("copy-badge");
+            if (!badge.classList.contains("success")) {
+                badge.innerText = translations[lang].copyBtn;
+            } else {
+                badge.innerText = translations[lang].copiedBtn;
+            }
+
+            document.getElementById("step-1-text").innerText = translations[lang].step1;
+            document.getElementById("step-2-text").innerText = translations[lang].step2;
+            document.getElementById("step-3-text").innerText = translations[lang].step3;
+            document.getElementById("back-text").innerText = translations[lang].backText;
+
+            // Toggle active button style
+            document.getElementById("lang-btn-pt").classList.toggle("active", lang === 'pt');
+            document.getElementById("lang-btn-en").classList.toggle("active", lang === 'en');
+        }
+
+        // Copy PIX key to clipboard function
+        function copyKey() {
+            const pixText = document.getElementById("pix-key-val").innerText;
+            const badge = document.getElementById("copy-badge");
+            
+            navigator.clipboard.writeText(pixText).then(() => {
+                badge.innerText = translations[currentLang].copiedBtn;
+                badge.classList.add("success");
+                
+                setTimeout(() => {
+                    badge.innerText = translations[currentLang].copyBtn;
+                    badge.classList.remove("success");
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy key: ", err);
+            });
+        }
+
+        // Retrieve and initialize language
+        const storedLang = localStorage.getItem('user-lang');
+        let initialLang = 'pt';
+        if (storedLang) {
+            if (storedLang.startsWith('pt')) {
+                initialLang = 'pt';
+            } else if (storedLang.startsWith('en')) {
+                initialLang = 'en';
+            }
+        } else {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (!userLang.startsWith("pt")) {
+                initialLang = 'en';
+            } else {
+                initialLang = 'pt';
+            }
+        }
+        setLanguage(initialLang);
+    </script>
+</body>
+</html>
