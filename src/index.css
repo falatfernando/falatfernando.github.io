@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Custom animation keyframes if needed, though Framer Motion is used */
+}
+
+/* Glassmorphism utility classes and scrollbar styling */
+@layer utilities {
+  .glass {
+    background: rgba(9, 9, 11, 0.7); /* zinc-950 with opacity */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(63, 63, 70, 0.4); /* zinc-700 with opacity */
+  }
+  
+  .glass-hover:hover {
+    border-color: rgba(16, 185, 129, 0.4); /* emerald-500 with opacity */
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+  }
+
+  /* Custom scrollbar for webkit */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(9, 9, 11, 0.5);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(63, 63, 70, 0.6);
+    border-radius: 9999px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(16, 185, 129, 0.6); /* emerald-500 */
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #09090b; /* zinc-950 */
+  color: #f4f4f5; /* zinc-100 */
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
