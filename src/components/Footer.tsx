@@ -68,6 +68,17 @@ export const Footer: React.FC<FooterProps> = ({ t }) => {
           &copy; {currentYear} Fernando Falat. {t.footer.text}
         </p>
 
+        {/* Zuk Easter Egg */}
+        <div className="mt-8 flex justify-center">
+          <a
+            href="/infernal_cape"
+            className="opacity-20 hover:opacity-100 transition-opacity duration-300"
+            title="Infernal Cape"
+          >
+            <img src="/images/TzKal-Zuk.webp" alt="Zuk" className="w-8 h-8 object-contain drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
+          </a>
+        </div>
+
       </div>
     </footer>
   );

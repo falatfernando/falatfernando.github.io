@@ -43,45 +43,13 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Profile Card / Left side */}
+          {/* Biography Highlights */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-4 flex flex-col items-center lg:sticky lg:top-24"
-          >
-            <div className="relative group">
-              {/* Outer gradient glow */}
-              <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 opacity-45 blur group-hover:opacity-75 transition duration-300"></div>
-              {/* Profile Image container */}
-              <div className="relative w-44 h-44 rounded-full overflow-hidden border-2 border-zinc-950 bg-zinc-900">
-                <img
-                  src="/images/profile_picture.jpg"
-                  alt="Fernando Falat"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/favicon.svg';
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="mt-6 text-center">
-              <h3 className="text-lg font-bold text-zinc-100 font-mono">Fernando Falat</h3>
-              <p className="text-xs text-zinc-400 font-mono mt-1">
-                Full-Stack Developer & Data Engineer
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Biography Highlights / Right side */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="lg:col-span-8 text-left"
+            className="lg:col-span-10 lg:col-start-2 text-left w-full"
           >
             <h4 className="text-sm font-mono text-emerald-400 font-bold uppercase tracking-wider mb-6 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>

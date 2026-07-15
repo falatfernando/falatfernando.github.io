@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Terminal, Play, Server, Cpu, Database } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import type { TranslationSchema } from '../locales/translations';
 
 interface HeroProps {
@@ -8,38 +8,6 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ t }) => {
-  const [terminalLines, setTerminalLines] = useState<string[]>([]);
-  const [pipelineStep, setPipelineStep] = useState(0);
-
-  // Simulated data pipeline log steps to run in the terminal mockup
-  const logs = [
-    'Initializing bio_pipeline v2.4.1...',
-    'Connecting to AWS cluster: eu-west-1 [OK]',
-    'Loading WHO catalogue TB drug resistance profiles...',
-    'Querying TBDashboard DB (PostgreSQL)... 1,420 entries found',
-    'Executing ML model for protein stability (PreProt)...',
-    'Feature extraction complete (shape=[482, 128])',
-    'PreProt prediction: stability score = 0.942 [PASS]',
-    'Syncing local workout cache to PANTHEON offline store...',
-    'Optimizing web app bundle size... gzip: 42.1KB [PASS]',
-    'Pipeline execution succeeded. Listening on port 8080...',
-  ];
-
-  useEffect(() => {
-    if (pipelineStep < logs.length) {
-      const timer = setTimeout(() => {
-        setTerminalLines((prev) => [...prev, logs[pipelineStep]]);
-        setPipelineStep((prev) => prev + 1);
-      }, 1200 + Math.random() * 800);
-      return () => clearTimeout(timer);
-    } else {
-      const resetTimer = setTimeout(() => {
-        setTerminalLines([]);
-        setPipelineStep(0);
-      }, 5000);
-      return () => clearTimeout(resetTimer);
-    }
-  }, [pipelineStep]);
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
@@ -110,80 +78,27 @@ export const Hero: React.FC<HeroProps> = ({ t }) => {
             </motion.div>
           </div>
 
-          {/* Right Column: Code Terminal Mockup */}
+          {/* Right Column: Hero Photo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-5 w-full flex flex-col justify-center"
+            className="lg:col-span-5 w-full flex justify-center items-center"
           >
-            <div className="w-full glass rounded-2xl overflow-hidden shadow-2xl border border-zinc-800/60">
-              
-              {/* Terminal Header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-zinc-900/40 border-b border-zinc-800/40">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-rose-500/70"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-500/70"></div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/70"></div>
-                </div>
-                <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-500">
-                  <Terminal size={12} />
-                  <span>fernando-pipeline.sh</span>
-                </div>
-                <div className="w-10"></div> {/* spacer */}
+            <div className="relative group max-w-sm w-full aspect-[3/4]">
+              {/* Outer gradient glow */}
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-500 to-cyan-500 opacity-30 blur-xl group-hover:opacity-50 transition duration-500"></div>
+              {/* Photo Container */}
+              <div className="relative w-full h-full rounded-3xl overflow-hidden border border-zinc-800/60 bg-zinc-900 shadow-2xl">
+                <img
+                  src="/images/profile_picture.jpg"
+                  alt="Hero Profile"
+                  className="w-full h-full object-cover object-center transform-gpu scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/favicon.svg';
+                  }}
+                />
               </div>
-
-              {/* Terminal Body */}
-              <div className="p-4 sm:p-5 font-mono text-xs text-left h-[260px] sm:h-[300px] overflow-y-auto space-y-2 bg-zinc-950/80">
-                
-                {/* Console prompt */}
-                <div className="flex items-center gap-2 text-zinc-500 mb-4">
-                  <span className="text-emerald-500">~</span>
-                  <span className="text-zinc-400">./run_pipeline.sh --deploy-analytics</span>
-                  <Play size={10} className="text-emerald-400 fill-emerald-400 animate-pulse" />
-                </div>
-
-                {/* Animated log lines */}
-                {terminalLines.map((line, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -5 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.25 }}
-                    className={`leading-relaxed ${
-                      line.includes('[OK]') || line.includes('[PASS]') 
-                        ? 'text-emerald-400' 
-                        : line.includes('prediction') 
-                        ? 'text-cyan-400 font-semibold' 
-                        : 'text-zinc-300'
-                    }`}
-                  >
-                    <span className="text-zinc-600 mr-2">❯</span>
-                    {line}
-                  </motion.div>
-                ))}
-
-                {/* Cursor indicator */}
-                <motion.div
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
-                  className="inline-block w-1.5 h-3.5 bg-emerald-400 ml-1 align-middle"
-                ></motion.div>
-              </div>
-
-              {/* Terminal Stats Footer */}
-              <div className="flex items-center justify-around px-4 py-3 bg-zinc-900/20 border-t border-zinc-800/40 text-[10px] sm:text-xs font-mono text-zinc-500">
-                <span className="flex items-center gap-1">
-                  <Server size={10} className="text-emerald-500" /> Cloud Sync
-                </span>
-                <span className="flex items-center gap-1">
-                  <Cpu size={10} className="text-cyan-500" /> ML Predictor
-                </span>
-                <span className="flex items-center gap-1">
-                  <Database size={10} className="text-emerald-500" /> PostgreSQL
-                </span>
-              </div>
-
             </div>
           </motion.div>
 
