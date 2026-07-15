@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Briefcase, GraduationCap, Dna, Cloud } from 'lucide-react';
+import { Award, Briefcase, GraduationCap, Dna, Cloud, Terminal } from 'lucide-react';
 import type { TranslationSchema } from '../locales/translations';
 
 interface AboutSectionProps {
@@ -19,9 +19,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ t }) => {
       case 3:
         return <GraduationCap size={18} className="text-cyan-400" />;
       case 4:
-        return <Briefcase size={18} className="text-emerald-400" />;
+        return <Terminal size={18} className="text-emerald-400" />;
       case 5:
-        return <Cloud size={18} className="text-cyan-400" />;
+        return <Briefcase size={18} className="text-cyan-400" />;
+      case 6:
+        return <Cloud size={18} className="text-emerald-400" />;
       default:
         return <GraduationCap size={18} className="text-emerald-400" />;
     }

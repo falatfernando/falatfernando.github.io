@@ -160,6 +160,10 @@ export const translations: Record<'pt' | 'en', TranslationSchema> = {
           institution: 'pela Johns Hopkins University'
         },
         {
+          title: 'Embaixador Nextflow (2026/2)',
+          institution: 'selecionado como embaixador oficial da comunidade'
+        },
+        {
           title: 'Experiência Sênior em Papéis de Dados na Indústria',
           institution: 'com histórico em arquitetura e analytics corporativos (BRF S.A.)'
         },
@@ -301,6 +305,10 @@ export const translations: Record<'pt' | 'en', TranslationSchema> = {
         {
           title: 'Genomic Data Science Certificate',
           institution: 'by Johns Hopkins University'
+        },
+        {
+          title: 'Nextflow Ambassador (2026/2)',
+          institution: 'selected as an official community ambassador'
         },
         {
           title: 'Senior Experience on Industry Data Roles',
